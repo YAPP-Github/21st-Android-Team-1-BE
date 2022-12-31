@@ -56,8 +56,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
-            touch hello.txt
-            echo "docker pull ${{ secrets.DOCKERHUB_REPO }} || ${{ steps.meta.outputs.tags }} || ${{ steps.date.outputs.date }}" > hello.txt
             docker pull ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
             docker stop dev-server
             docker rm dev-server
