@@ -47,3 +47,18 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      # docker run
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            touch hello.txt
+            echo "docker pull ${{ secrets.DOCKERHUB_REPO }} || ${{ steps.meta.outputs.tags }} || ${{ steps.date.outputs.date }}" > hello.txt
+            docker pull ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
+            docker stop dev-server
+            docker rm dev-server
+            docker run --restart always -d -p 8080:8080 --name dev-server ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
