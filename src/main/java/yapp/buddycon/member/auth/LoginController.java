@@ -1,10 +1,7 @@
 package yapp.buddycon.member.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,10 +14,10 @@ public class LoginController {
   public TokenResponse login(@PathVariable String accessToken) {
     return authService.login(accessToken);
   }
-//
-//  @PostMapping("reissue")
-//  public TokenResponse reissue(AuthMember authMember) {
-//    return authService.reissue(authMember);
-//  }
+
+  @PostMapping("reissue")
+  public TokenResponse reissue(@RequestBody ReissueRequest reissueRequest) {
+    return authService.reissue(reissueRequest);
+  }
 
 }
