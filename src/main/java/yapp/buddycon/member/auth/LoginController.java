@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/")
 public class LoginController {
 
-  private final AuthService loginService;
+  private final AuthService authService;
 
   @PostMapping("login/{accessToken}")
-  public void login(@PathVariable String accessToken) {
-    loginService.login(accessToken);
+  public TokenResponse login(@PathVariable String accessToken) {
+    return authService.login(accessToken);
   }
+//
+//  @PostMapping("reissue")
+//  public TokenResponse reissue(AuthMember authMember) {
+//    return authService.reissue(authMember);
+//  }
 
 }
