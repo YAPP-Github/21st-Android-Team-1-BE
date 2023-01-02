@@ -1,7 +1,7 @@
 package yapp.buddycon.member.auth;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -11,10 +11,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import yapp.buddycon.exception.CustomException;
 import yapp.buddycon.exception.ErrorCode;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthenticationArgumentResolver implements HandlerMethodArgumentResolver {
+
+  @Value("${security.jwt.token.bearer-type}")
+  private String BEARER_TYPE;
 
   private final AuthMemberProvider authMemberProvider;
 
@@ -25,9 +27,13 @@ public class AuthenticationArgumentResolver implements HandlerMethodArgumentReso
 
   @Override
   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-    String token = webRequest.getHeader("Authorization");
-    if (token == null) throw new CustomException(ErrorCode.NOT_EXIST_ACCESS_TOKEN);
-    authMemberProvider.getAuthMember(token.substring(7));
-    return null;
+    String bearerToken = webRequest.getHeader("Authorization");
+    validateBearerToken(bearerToken);
+    return authMemberProvider.getAuthMember(bearerToken.substring(7));
+  }
+
+  private void validateBearerToken(String bearerToken) {
+    if (bearerToken == null) throw new CustomException(ErrorCode.NOT_EXIST_ACCESS_TOKEN);
+    if(!bearerToken.startsWith(BEARER_TYPE)) throw new CustomException(ErrorCode.UNSUPPORTED_JWT_TOKEN);
   }
 }
