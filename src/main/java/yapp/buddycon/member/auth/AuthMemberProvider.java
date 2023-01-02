@@ -10,6 +10,7 @@ public class AuthMemberProvider {
   private final TokenDecoder decoder;
 
   public AuthMember getAuthMember(String accessToken) {
-    return new AuthMember(Long.parseLong(decoder.decode(accessToken)));
+    Long id = decoder.decode(accessToken).getBody().get("memberId", Long.class);
+    return new AuthMember(id);
   }
 }
