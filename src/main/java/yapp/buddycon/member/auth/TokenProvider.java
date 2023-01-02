@@ -5,12 +5,16 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @Component
+@RequiredArgsConstructor
 public class TokenProvider {
   @Value("${security.jwt.token.bearer-type}")
   private String BEARER_TYPE;
@@ -21,15 +25,16 @@ public class TokenProvider {
   @Value("${security.jwt.token.refresh-token-expire-time}")
   private long REFRESH_TOKEN_EXPIRE_TIME;
 
-  public TokenResponse createToken(String payload) {
+  private final RedisTemplate<String, Object> redisTemplate;
+
+  public TokenResponse createToken(Long memberId) {
     String secretKey = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
-    Claims claims = Jwts.claims().setSubject(payload);
     Date now = new Date();
 
     Date accessTokenExpiresIn = new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_TIME);
     String accessToken = Jwts.builder()
-      .setClaims(claims)
-      .setIssuedAt(now)
+      .setClaims(new HashMap<String, Long>(){{ put("memberId", memberId); }})
+//      .setIssuedAt(now)
       .setExpiration(accessTokenExpiresIn)
       .signWith(SignatureAlgorithm.HS256, secretKey)
       .compact();
@@ -38,6 +43,18 @@ public class TokenProvider {
       .signWith(SignatureAlgorithm.HS256, secretKey)
       .compact();
 
+    saveRefreshToken(memberId, refreshToken);
+
     return new TokenResponse(BEARER_TYPE, accessToken, refreshToken, accessTokenExpiresIn.getTime());
+  }
+
+  private void saveRefreshToken(Long memberId, String refreshToken) {
+    redisTemplate.opsForValue()
+      .set(
+        "RT:" + memberId,
+        refreshToken,
+        REFRESH_TOKEN_EXPIRE_TIME,
+        TimeUnit.MILLISECONDS
+      );
   }
 }
