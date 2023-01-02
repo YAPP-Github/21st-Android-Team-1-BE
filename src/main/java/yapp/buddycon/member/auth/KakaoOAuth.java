@@ -16,7 +16,7 @@ public class KakaoOAuth {
    */
   private final WebClient webClient = WebClient.create("https://kapi.kakao.com/v2/user/me");
 
-  public OAuthMember getUserAttributes(String accessToken) {
+  public OAuthMemberInfo getUserAttributes(String accessToken) {
     return webClient.get()
       .headers(header -> { header.setBearerAuth(accessToken); })
       .retrieve()
@@ -31,8 +31,8 @@ public class KakaoOAuth {
     Long id,
     KakaoNickname properties
   ){
-    public OAuthMember toOAuthMember(){
-      return new OAuthMember(id, properties().nickname());
+    public OAuthMemberInfo toOAuthMember(){
+      return new OAuthMemberInfo(id, properties().nickname());
     }
   }
 

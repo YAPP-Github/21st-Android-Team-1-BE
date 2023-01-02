@@ -1,6 +1,6 @@
 package yapp.buddycon.member.auth;
 
-public record OAuthMember(
+public record OAuthMemberInfo(
   Long id,
   String nickname
 ) {
