@@ -16,11 +16,16 @@ public class AuthService {
 
   @Transactional
   public TokenResponse login(String accessToken) {
-    OAuthMember oAuthMember = kakaoOAuth.getUserAttributes(accessToken);
-    Member member = memberRepository.findMemberById(oAuthMember.id());
+    OAuthMemberInfo oAuthMemberInfo = kakaoOAuth.getUserAttributes(accessToken);
+    Member member = memberRepository.findMemberById(oAuthMemberInfo.id());
     if (member == null) {
-      member = memberRepository.save(new Member(oAuthMember.id(), oAuthMember.nickname()));
+      member = memberRepository.save(new Member(oAuthMemberInfo.id(), oAuthMemberInfo.nickname()));
     }
-    return tokenProvider.createToken(String.valueOf(member.getId()));
+    return tokenProvider.createToken(member.getId());
   }
+
+//  @Transactional
+//  public TokenResponse reissue(AuthMember authMember) {
+//    return tokenProvider.createToken(authMember.id());
+//  }
 }
