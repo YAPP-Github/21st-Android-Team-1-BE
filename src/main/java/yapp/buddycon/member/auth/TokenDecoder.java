@@ -12,9 +12,9 @@ public class TokenDecoder {
   @Value("${security.jwt.token.secret-key}")
   private String SECRET_KEY;
 
-  public String decode(String accessToken) {
+  public Jws<Claims> decode(String token) {
     try {
-      return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(accessToken).getBody().get("memberId").toString();
+      return Jwts.parserBuilder().setSigningKey(SECRET_KEY.getBytes()).build().parseClaimsJws(token);
     } catch (ExpiredJwtException e) {
       throw new CustomException(ErrorCode.EXPIRED_ACCESS_TOKEN);
     } catch (SecurityException | MalformedJwtException e) {
