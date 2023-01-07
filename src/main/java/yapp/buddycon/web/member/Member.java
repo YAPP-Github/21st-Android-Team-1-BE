@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Member extends BaseEntity {
 
-  @Column(name = "client_id")
+  @Column(name = "client_id", unique = true)
   private Long clientId;
 
   @Column(name = "name")
