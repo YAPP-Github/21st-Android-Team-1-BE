@@ -5,3 +5,25 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+
+security:
+  jwt:
+    token:
+      bearer-type:
+      secret-key:
+      access-token-expire-time:
+      refresh-token-expire-time:
