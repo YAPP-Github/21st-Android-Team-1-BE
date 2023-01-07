@@ -1,4 +1,4 @@
-package yapp.buddycon.member;
+package yapp.buddycon.common.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

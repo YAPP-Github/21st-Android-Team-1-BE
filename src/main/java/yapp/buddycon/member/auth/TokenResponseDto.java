@@ -1,9 +1,9 @@
 package yapp.buddycon.member.auth;
 
-public record TokenResponse(
+public record TokenResponseDto(
   String grantType,
   String accessToken,
-  String refreshToken,
+//  String refreshToken,
   Long accessTokenExpiresIn
 ) {
 }

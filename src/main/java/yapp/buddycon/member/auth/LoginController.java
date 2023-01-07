@@ -2,6 +2,8 @@ package yapp.buddycon.member.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import yapp.buddycon.member.auth.TokenResponseDto;
+import yapp.buddycon.member.auth.AuthService;
 
 @RestController
 @RequiredArgsConstructor
@@ -11,13 +13,13 @@ public class LoginController {
   private final AuthService authService;
 
   @PostMapping("login/{accessToken}")
-  public TokenResponse login(@PathVariable String accessToken) {
+  public TokenResponseDto login(@PathVariable String accessToken) {
     return authService.login(accessToken);
   }
 
-  @PostMapping("reissue")
-  public TokenResponse reissue(@RequestBody ReissueRequest reissueRequest) {
-    return authService.reissue(reissueRequest);
-  }
+//  @PostMapping("reissue")
+//  public TokenResponseDto reissue(@RequestBody ReissueRequestDto reissueRequestDto) {
+//    return authService.reissue(reissueRequestDto);
+//  }
 
 }

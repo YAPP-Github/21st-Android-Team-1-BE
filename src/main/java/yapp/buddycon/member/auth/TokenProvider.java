@@ -1,6 +1,5 @@
 package yapp.buddycon.member.auth;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class TokenProvider {
 
   private final RedisTemplate<String, Object> redisTemplate;
 
-  public TokenResponse createToken(Long memberId) {
+  public TokenResponseDto createToken(Long memberId) {
     String secretKey = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
     Date now = new Date();
 
@@ -38,14 +37,15 @@ public class TokenProvider {
       .setExpiration(accessTokenExpiresIn)
       .signWith(SignatureAlgorithm.HS256, secretKey)
       .compact();
-    String refreshToken = Jwts.builder()
-      .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_TIME))
-      .signWith(SignatureAlgorithm.HS256, secretKey)
-      .compact();
+//    String refreshToken = Jwts.builder()
+//      .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_EXPIRE_TIME))
+//      .signWith(SignatureAlgorithm.HS256, secretKey)
+//      .compact();
 
-    saveRefreshToken(memberId, refreshToken);
+//    saveRefreshToken(memberId, refreshToken);
 
-    return new TokenResponse(BEARER_TYPE, accessToken, refreshToken, accessTokenExpiresIn.getTime());
+//    return new TokenResponseDto(BEARER_TYPE, accessToken, refreshToken, accessTokenExpiresIn.getTime());
+    return new TokenResponseDto(BEARER_TYPE, accessToken, accessTokenExpiresIn.getTime());
   }
 
   private void saveRefreshToken(Long memberId, String refreshToken) {

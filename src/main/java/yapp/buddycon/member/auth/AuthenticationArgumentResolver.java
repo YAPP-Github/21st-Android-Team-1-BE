@@ -8,8 +8,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import yapp.buddycon.exception.CustomException;
-import yapp.buddycon.exception.ErrorCode;
+import yapp.buddycon.common.exception.CustomException;
+import yapp.buddycon.common.exception.ErrorCode;
 
 @Component
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class AuthenticationArgumentResolver implements HandlerMethodArgumentReso
   public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
     String bearerToken = webRequest.getHeader("Authorization");
     validateBearerToken(bearerToken);
-    return authMemberProvider.getAuthMember(bearerToken.substring(7));
+    return authMemberProvider.getAuthMember(bearerToken.split(" ")[1].trim());
   }
 
   private void validateBearerToken(String bearerToken) {
