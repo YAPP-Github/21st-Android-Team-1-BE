@@ -7,9 +7,15 @@ spring:
       matching-strategy: ant_path_matcher
 
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show-sql: true
   datasource:
     url:
     username:
@@ -27,3 +33,14 @@ security:
       secret-key:
       access-token-expire-time:
       refresh-token-expire-time:
+
+springdoc:
+  packages-to-scan: yapp.buddycon
+  swagger-ui:
+    path: /buddycon/swagger-ui.html
+    display-request-duration: true
+    disable-swagger-default-url: true
+
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
