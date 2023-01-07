@@ -19,7 +19,7 @@ public class AuthService {
   @Transactional
   public TokenResponseDto login(String accessToken) {
     OAuthMemberInfo oAuthMemberInfo = kakaoOAuth.getUserAttributes(accessToken);
-    Member member = memberRepository.findMemberById(oAuthMemberInfo.id());
+    Member member = memberRepository.findMemberByClientId(oAuthMemberInfo.id());
     if (member == null) {
       member = memberRepository.save(new Member(oAuthMemberInfo.id(), oAuthMemberInfo.nickname()));
     }
