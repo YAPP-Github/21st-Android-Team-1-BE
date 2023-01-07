@@ -1,11 +1,10 @@
-package yapp.buddycon.member.auth;
+package yapp.buddycon.web.member.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import yapp.buddycon.member.Member;
-import yapp.buddycon.member.MemberRepository;
+import yapp.buddycon.web.member.Member;
+import yapp.buddycon.web.member.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +14,7 @@ public class AuthService {
   private final KakaoOAuth kakaoOAuth;
   private final TokenProvider tokenProvider;
   private final TokenDecoder tokenDecoder;
-  private final RedisTemplate<String, Object> redisTemplate;
+//  private final RedisTemplate<String, Object> redisTemplate;
 
   @Transactional
   public TokenResponseDto login(String accessToken) {

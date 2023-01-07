@@ -1,4 +1,4 @@
-package yapp.buddycon.member.auth;
+package yapp.buddycon.web.member.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;

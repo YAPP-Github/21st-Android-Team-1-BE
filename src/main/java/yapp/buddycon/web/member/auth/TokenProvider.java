@@ -1,10 +1,9 @@
-package yapp.buddycon.member.auth;
+package yapp.buddycon.web.member.auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -24,7 +23,7 @@ public class TokenProvider {
   @Value("${security.jwt.token.refresh-token-expire-time}")
   private long REFRESH_TOKEN_EXPIRE_TIME;
 
-  private final RedisTemplate<String, Object> redisTemplate;
+//  private final RedisTemplate<String, Object> redisTemplate;
 
   public TokenResponseDto createToken(Long memberId) {
     String secretKey = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
@@ -48,13 +47,13 @@ public class TokenProvider {
     return new TokenResponseDto(BEARER_TYPE, accessToken, accessTokenExpiresIn.getTime());
   }
 
-  private void saveRefreshToken(Long memberId, String refreshToken) {
-    redisTemplate.opsForValue()
-      .set(
-        "RT:" + memberId,
-        refreshToken,
-        REFRESH_TOKEN_EXPIRE_TIME,
-        TimeUnit.MILLISECONDS
-      );
-  }
+//  private void saveRefreshToken(Long memberId, String refreshToken) {
+//    redisTemplate.opsForValue()
+//      .set(
+//        "RT:" + memberId,
+//        refreshToken,
+//        REFRESH_TOKEN_EXPIRE_TIME,
+//        TimeUnit.MILLISECONDS
+//      );
+//  }
 }

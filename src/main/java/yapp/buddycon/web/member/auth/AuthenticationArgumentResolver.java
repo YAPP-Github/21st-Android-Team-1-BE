@@ -1,4 +1,4 @@
-package yapp.buddycon.member.auth;
+package yapp.buddycon.web.member.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

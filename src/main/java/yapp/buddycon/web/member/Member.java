@@ -1,4 +1,4 @@
-package yapp.buddycon.member;
+package yapp.buddycon.web.member;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

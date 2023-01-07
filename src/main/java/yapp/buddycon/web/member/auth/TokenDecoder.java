@@ -1,4 +1,4 @@
-package yapp.buddycon.member.auth;
+package yapp.buddycon.web.member.auth;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
