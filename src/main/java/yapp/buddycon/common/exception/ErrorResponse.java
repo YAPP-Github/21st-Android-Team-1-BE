@@ -1,4 +1,4 @@
-package yapp.buddycon.exception;
+package yapp.buddycon.common.exception;
 
 import lombok.Builder;
 import lombok.Getter;

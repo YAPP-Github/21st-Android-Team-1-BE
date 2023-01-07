@@ -3,8 +3,8 @@ package yapp.buddycon.member.auth;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import yapp.buddycon.exception.CustomException;
-import yapp.buddycon.exception.ErrorCode;
+import yapp.buddycon.common.exception.CustomException;
+import yapp.buddycon.common.exception.ErrorCode;
 
 @Component
 public class KakaoOAuth {

@@ -1,4 +1,4 @@
-package yapp.buddycon.exception;
+package yapp.buddycon.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @AllArgsConstructor
 public enum ErrorCode {
 
+  // TODO 코드 바꾸기
   /* 400 BAD_REQUEST */
   INVALID_KAKAO_ACCESS_TOKEN(BAD_REQUEST, "유효하지 않은 카카오 access token입니다."),
   NOT_EXIST_ACCESS_TOKEN(BAD_REQUEST, "access token이 존재하지 않습니다."),

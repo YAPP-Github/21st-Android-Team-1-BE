@@ -1,4 +1,4 @@
-package yapp.buddycon.exception;
+package yapp.buddycon.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

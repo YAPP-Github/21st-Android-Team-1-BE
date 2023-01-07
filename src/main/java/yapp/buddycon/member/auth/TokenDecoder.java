@@ -3,8 +3,8 @@ package yapp.buddycon.member.auth;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import yapp.buddycon.exception.CustomException;
-import yapp.buddycon.exception.ErrorCode;
+import yapp.buddycon.common.exception.CustomException;
+import yapp.buddycon.common.exception.ErrorCode;
 
 @Component
 public class TokenDecoder {
