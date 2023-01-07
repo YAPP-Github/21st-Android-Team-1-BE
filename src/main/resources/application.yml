@@ -1,10 +1,15 @@
+server:
+  port: 8080
+
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
   datasource:
     url:
     username:
@@ -14,7 +19,6 @@ spring:
 #  redis:
 #    host: 127.0.0.1
 #    port: 6379
-
 
 security:
   jwt:
