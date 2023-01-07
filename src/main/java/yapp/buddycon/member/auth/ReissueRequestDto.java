@@ -1,6 +1,6 @@
 package yapp.buddycon.member.auth;
 
-public record ReissueRequest(
+public record ReissueRequestDto(
   String accessToken,
   String refreshToken
 ) {
