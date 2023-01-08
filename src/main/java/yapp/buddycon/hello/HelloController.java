@@ -11,7 +11,7 @@ public class HelloController {
 
   @GetMapping
   public String hello(AuthMember authMember) {
-    return "hi buddy" + authMember.id() + "1~";
+    return "hi buddy" + authMember.id() + "~";
   }
 
 }
