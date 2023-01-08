@@ -20,16 +20,11 @@ spring:
     url:
     username:
     password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
 
 security:
   jwt:
     token:
-      bearer-type:
+      bearer-type: Bearer
       secret-key:
       access-token-expire-time:
       refresh-token-expire-time:
