@@ -11,7 +11,7 @@ import java.util.Arrays;
 import org.springdoc.core.SpringDocUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import yapp.buddycon.common.domain.AuthMember;
+import yapp.buddycon.web.auth.adapter.out.AuthMember;
 
 @Configuration
 public class SwaggerConfig {

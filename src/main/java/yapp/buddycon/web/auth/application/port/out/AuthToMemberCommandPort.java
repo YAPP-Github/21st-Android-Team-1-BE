@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth.application.port.out;
+package yapp.buddycon.web.auth.application.port.out;
 
 import yapp.buddycon.web.member.domain.Member;
 

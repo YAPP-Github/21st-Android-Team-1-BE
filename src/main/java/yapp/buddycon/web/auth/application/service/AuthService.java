@@ -1,27 +1,31 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.web.auth.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import yapp.buddycon.web.member.Member;
-import yapp.buddycon.web.member.MemberRepository;
+import yapp.buddycon.web.auth.application.port.out.AuthToMemberCommandPort;
+import yapp.buddycon.web.auth.application.port.out.AuthToMemberQueryPort;
+import yapp.buddycon.web.member.domain.Member;
+import yapp.buddycon.web.auth.application.port.in.OAuthMemberInfo;
+import yapp.buddycon.web.auth.adapter.in.response.TokenResponseDto;
+import yapp.buddycon.web.auth.application.port.in.AuthUseCase;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements AuthUseCase {
 
-  private final MemberRepository memberRepository;
-  private final KakaoOAuth kakaoOAuth;
+  private final KakaoOAuthMapper kakaoOAuthMapper;
   private final TokenProvider tokenProvider;
-  private final TokenDecoder tokenDecoder;
 //  private final RedisTemplate<String, Object> redisTemplate;
+  private final AuthToMemberQueryPort authToMemberQueryPort;
+  private final AuthToMemberCommandPort authToMemberCommandPort;
 
   @Transactional
   public TokenResponseDto login(String accessToken) {
-    OAuthMemberInfo oAuthMemberInfo = kakaoOAuth.getUserAttributes(accessToken);
-    Member member = memberRepository.findMemberByClientId(oAuthMemberInfo.id());
+    OAuthMemberInfo oAuthMemberInfo = kakaoOAuthMapper.getUserAttributes(accessToken);
+    Member member = authToMemberQueryPort.findMemberByClientId(oAuthMemberInfo.id());
     if (member == null) {
-      member = memberRepository.save(new Member(oAuthMemberInfo.id(), oAuthMemberInfo.nickname()));
+      member = authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), oAuthMemberInfo.nickname()));
     }
     return tokenProvider.createToken(member.getId());
   }

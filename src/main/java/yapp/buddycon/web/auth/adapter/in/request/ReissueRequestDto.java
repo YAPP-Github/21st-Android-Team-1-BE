@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth.adapter.in.request;
+package yapp.buddycon.web.auth.adapter.in.request;
 
 public record ReissueRequestDto(
   String accessToken,

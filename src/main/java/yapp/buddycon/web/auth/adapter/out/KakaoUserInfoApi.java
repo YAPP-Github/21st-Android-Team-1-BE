@@ -1,8 +1,8 @@
-package yapp.buddycon.web.member.auth.adapter.out;
+package yapp.buddycon.web.auth.adapter.out;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import yapp.buddycon.web.member.auth.application.port.in.KakaoOAuthUseCase;
+import yapp.buddycon.web.auth.application.port.in.KakaoOAuthUseCase;
 
 @Component
 public class KakaoUserInfoApi implements KakaoOAuthUseCase {

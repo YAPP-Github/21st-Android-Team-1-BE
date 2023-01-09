@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth.application.port.in;
+package yapp.buddycon.web.auth.application.port.in;
 
 import org.springframework.web.reactive.function.client.WebClient;
 

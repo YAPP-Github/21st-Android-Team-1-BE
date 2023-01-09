@@ -1,13 +1,12 @@
-package yapp.buddycon.web.member.auth.application.service;
+package yapp.buddycon.web.auth.application.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
-import yapp.buddycon.web.member.auth.domain.OAuthMemberInfo;
-import yapp.buddycon.web.member.auth.application.port.in.KakaoOAuthUseCase;
+import yapp.buddycon.web.auth.application.port.in.OAuthMemberInfo;
+import yapp.buddycon.web.auth.application.port.in.KakaoOAuthUseCase;
 
 @Component
 @RequiredArgsConstructor

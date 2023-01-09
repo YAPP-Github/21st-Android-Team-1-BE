@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth.adapter.in;
+package yapp.buddycon.web.auth.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import yapp.buddycon.common.domain.AuthMember;
+import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
-import yapp.buddycon.web.member.auth.application.service.TokenDecoder;
+import yapp.buddycon.web.auth.application.service.TokenDecoder;
 
 @Component
 @RequiredArgsConstructor
