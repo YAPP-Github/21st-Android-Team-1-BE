@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.common.domain;
 
 public record AuthMember(
   Long id
