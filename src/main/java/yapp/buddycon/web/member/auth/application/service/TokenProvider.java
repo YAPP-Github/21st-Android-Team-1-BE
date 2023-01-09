@@ -1,15 +1,15 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.web.member.auth.application.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import yapp.buddycon.web.member.auth.adapter.in.response.TokenResponseDto;
 
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 @Component
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member;
+package yapp.buddycon.web.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
