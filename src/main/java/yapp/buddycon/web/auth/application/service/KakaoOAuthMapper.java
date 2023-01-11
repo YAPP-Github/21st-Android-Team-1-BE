@@ -1,25 +1,22 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.web.auth.application.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
+import yapp.buddycon.web.auth.application.port.in.OAuthMemberInfo;
+import yapp.buddycon.web.auth.application.port.in.KakaoOAuthUseCase;
 
 @Component
-public class KakaoOAuth {
-  /**
-   * curl -v -X POST "https://kapi.kakao.com/v2/user/me" \
-   * -H "Content-Type: application/x-www-form-urlencoded" \
-   * -H "Authorization: Bearer ${ACCESS_TOKEN}" \
-   * --data-urlencode 'property_keys=["kakao_account.name"]'
-   */
-  private final WebClient webClient = WebClient.create("https://kapi.kakao.com/v2/user/me");
+@RequiredArgsConstructor
+public class KakaoOAuthMapper {
+
+  private final KakaoOAuthUseCase kakaoOAuthUseCase;
 
   public OAuthMemberInfo getUserAttributes(String accessToken) {
-    return webClient.get()
-      .headers(header -> { header.setBearerAuth(accessToken); })
-      .retrieve()
+    return kakaoOAuthUseCase
+      .getUserAttributes(accessToken)
       .bodyToMono(Kakao.class)
       .onErrorMap((error) -> new CustomException(ErrorCode.INVALID_KAKAO_ACCESS_TOKEN))
       .map(Kakao::toOAuthMember)

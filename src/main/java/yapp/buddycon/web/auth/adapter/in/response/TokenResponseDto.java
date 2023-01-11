@@ -1,4 +1,4 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.web.auth.adapter.in.response;
 
 public record TokenResponseDto(
   String grantType,

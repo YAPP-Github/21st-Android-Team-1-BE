@@ -1,7 +1,9 @@
-package yapp.buddycon.web.member.auth;
+package yapp.buddycon.web.auth.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import yapp.buddycon.web.auth.adapter.in.response.TokenResponseDto;
+import yapp.buddycon.web.auth.application.service.AuthService;
 
 @RestController
 @RequiredArgsConstructor

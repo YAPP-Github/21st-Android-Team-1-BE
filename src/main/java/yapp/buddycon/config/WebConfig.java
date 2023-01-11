@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import yapp.buddycon.web.member.auth.AuthenticationArgumentResolver;
+import yapp.buddycon.web.auth.adapter.in.AuthenticationArgumentResolver;
 
 import java.util.List;
 
