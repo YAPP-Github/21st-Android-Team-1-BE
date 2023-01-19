@@ -1,9 +1,9 @@
-package yapp.buddycon.web.sharecoupon.adapter.in;
+package yapp.buddycon.web.coupon.adapter.in;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import yapp.buddycon.web.sharecoupon.application.port.in.SharedCouponUseCase;
+import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
 
 @RestController
 @RequiredArgsConstructor

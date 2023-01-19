@@ -1,8 +1,8 @@
-package yapp.buddycon.web.sharecoupon.adapter.out;
+package yapp.buddycon.web.coupon.adapter.out;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import yapp.buddycon.web.sharecoupon.application.port.out.SharedCouponCommandPort;
+import yapp.buddycon.web.coupon.application.port.out.SharedCouponCommandPort;
 
 @Repository
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package yapp.buddycon.web.sharecoupon.domain;
+package yapp.buddycon.web.coupon.domain;
 
 
 import javax.persistence.Column;

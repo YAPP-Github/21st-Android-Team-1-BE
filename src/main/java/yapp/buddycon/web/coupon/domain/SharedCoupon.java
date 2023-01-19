@@ -1,9 +1,8 @@
-package yapp.buddycon.web.sharecoupon.domain;
+package yapp.buddycon.web.coupon.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
-import yapp.buddycon.web.coupon.domain.Coupon;
 
 import javax.persistence.*;
 

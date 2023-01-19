@@ -1,10 +1,10 @@
-package yapp.buddycon.web.sharecoupon.application.service;
+package yapp.buddycon.web.coupon.application.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import yapp.buddycon.web.sharecoupon.application.port.in.SharedCouponUseCase;
-import yapp.buddycon.web.sharecoupon.application.port.out.SharedCouponCommandPort;
-import yapp.buddycon.web.sharecoupon.application.port.out.SharedCouponQueryPort;
+import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
+import yapp.buddycon.web.coupon.application.port.out.SharedCouponCommandPort;
+import yapp.buddycon.web.coupon.application.port.out.SharedCouponQueryPort;
 
 @Service
 @RequiredArgsConstructor
