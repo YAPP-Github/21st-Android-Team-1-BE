@@ -1,11 +1,11 @@
 package yapp.buddycon.web.coupon.adapter.in.response;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public record GifticonsResponseDto(
+public record CouponsResponseDto(
   Long id,
   String path,
   String name,
-  Date expireDate
+  LocalDate expireDate
 ) {
 }
