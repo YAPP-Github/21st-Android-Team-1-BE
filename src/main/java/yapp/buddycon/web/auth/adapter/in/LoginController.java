@@ -25,10 +25,4 @@ public class LoginController {
 //    return authService.reissue(reissueRequestDto);
 //  }
 
-  @PostMapping("unregister")
-  @Operation(summary = "회원 탈퇴")
-  public void unregister(AuthMember authMember) {
-
-  }
-
 }

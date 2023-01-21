@@ -2,6 +2,7 @@ package yapp.buddycon.web.member.adapter.in;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,12 @@ public class MemberController {
   @Operation(summary = "유저 알림 설정 수정")
   public void updateNotificationSetting(AuthMember authMember,
       NotificationSettingUpdateRequestDto dto) {
+
+  }
+
+  @DeleteMapping("/self")
+  @Operation(summary = "회원 탈퇴")
+  public void deleteMember(AuthMember authMember) {
 
   }
 
