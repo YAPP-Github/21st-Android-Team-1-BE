@@ -1,7 +1,7 @@
 package yapp.buddycon.web.member.adapter.in.response;
 
 public record NotificationSettingResponseDto(
-    Long id,
+    long id,
     boolean activate,
     boolean fourteenDaysLeft,
     boolean sevenDaysLeft,
