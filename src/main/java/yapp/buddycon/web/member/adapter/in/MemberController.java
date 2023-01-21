@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
@@ -23,7 +23,7 @@ public class MemberController {
     return dto;
   }
 
-  @PutMapping("/notification-setting")
+  @PatchMapping("/notification-setting")
   @Operation(summary = "유저 알림 설정 수정")
   public void updateNotificationSetting(AuthMember authMember,
       NotificationSettingUpdateRequestDto dto) {
