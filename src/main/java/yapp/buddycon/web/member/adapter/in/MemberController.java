@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.member.adapter.in.request.NotificationSettingUpdateRequestDto;
 import yapp.buddycon.web.member.adapter.in.response.NotificationSettingResponseDto;
@@ -25,15 +26,15 @@ public class MemberController {
 
   @PatchMapping("/notification-setting")
   @Operation(summary = "유저 알림 설정 수정")
-  public void updateNotificationSetting(AuthMember authMember,
+  public DefaultResponseDto updateNotificationSetting(AuthMember authMember,
       NotificationSettingUpdateRequestDto dto) {
-
+    return null;
   }
 
   @DeleteMapping("/self")
   @Operation(summary = "회원 탈퇴")
-  public void deleteMember(AuthMember authMember) {
-
+  public DefaultResponseDto deleteMember(AuthMember authMember) {
+    return null;
   }
 
 }
