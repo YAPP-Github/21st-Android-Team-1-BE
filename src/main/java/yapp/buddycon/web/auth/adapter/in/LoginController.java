@@ -3,8 +3,8 @@ package yapp.buddycon.web.auth.adapter.in;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import yapp.buddycon.web.auth.adapter.in.request.ReissueRequestDto;
 import yapp.buddycon.web.auth.adapter.in.response.TokenResponseDto;
-import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.auth.application.service.AuthService;
 
 @RestController
@@ -20,9 +20,9 @@ public class LoginController {
     return authService.login(accessToken);
   }
 
-//  @PostMapping("reissue")
-//  public TokenResponseDto reissue(@RequestBody ReissueRequestDto reissueRequestDto) {
-//    return authService.reissue(reissueRequestDto);
-//  }
+  @PostMapping("reissue")
+  public TokenResponseDto reissue(@RequestBody ReissueRequestDto reissueRequestDto) {
+    return authService.reissue(reissueRequestDto);
+  }
 
 }
