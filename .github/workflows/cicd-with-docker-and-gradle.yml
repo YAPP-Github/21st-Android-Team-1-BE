@@ -72,4 +72,4 @@ jobs:
             docker pull ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
             docker stop dev-server
             docker rm dev-server
-            docker run --restart always -d -p 8080:8080 --name dev-server ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
+            docker run --restart always -d --net my-bridge --name dev-server -p 8080:8080 ${{ steps.meta.outputs.tags }}-${{ steps.date.outputs.date }}
