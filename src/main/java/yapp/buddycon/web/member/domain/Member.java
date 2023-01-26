@@ -14,7 +14,16 @@ public class Member extends BaseEntity {
   @Column(name = "client_id", unique = true)
   private Long clientId;
 
-  @Column(name = "name")
-  private String name;
+  @Column(name = "email", nullable = false)
+  private String email;
+
+  @Column(name = "nickname", nullable = false)
+  private String nickname;
+
+  @Column(name = "gender")
+  private String gender;
+
+  @Column(name = "age_range")
+  private String ageRange;
 
 }
