@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public record GifticonInfoResponseDto(
   String imageUrl,
+  String barcode,
   String name,
   LocalDate expireDate,
   String storeName,
