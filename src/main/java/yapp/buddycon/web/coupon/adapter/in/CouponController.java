@@ -64,6 +64,12 @@ public class CouponController {
     return null;
   }
 
+  @GetMapping("/gifticon/{barcode}")
+  @Operation(summary = "바코드로 기프티콘 정보 불러오기")
+  public GifticonInfoResponseDto getGifticonInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
+    return null;
+  }
+
   @GetMapping("/custom-coupon/{barcode}")
   @Operation(summary = "바코드로 제작티콘 정보 불러오기")
   public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
