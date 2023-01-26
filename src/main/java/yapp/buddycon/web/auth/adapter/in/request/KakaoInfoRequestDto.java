@@ -9,7 +9,7 @@ public record KakaoInfoRequestDto(
   @Email
   String email,
   @NotEmpty
-  String nickname,
+  String name,
 
   String gender,
   String ageRange

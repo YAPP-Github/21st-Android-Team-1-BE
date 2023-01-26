@@ -30,12 +30,14 @@ public class AuthService implements AuthUseCase {
   public TokenResponseDto login(KakaoInfoRequestDto kakaoInfoRequestDto) {
     OAuthMemberInfo oAuthMemberInfo = kakaoOAuthMapper.getUserAttributes(kakaoInfoRequestDto.accessToken());
     Member member = authToMemberQueryPort.findMemberByClientId(oAuthMemberInfo.id());
-    if (member == null) member = signup(oAuthMemberInfo, kakaoInfoRequestDto);
+    if (member == null){
+      member = Member.create(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange());
+    }
     return tokenProvider.createToken(member.getId());
   }
 
   private Member signup(OAuthMemberInfo oAuthMemberInfo, KakaoInfoRequestDto kakaoInfoRequestDto) {
-    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.nickname(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange()));
+    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange()));
   }
 
   @Transactional
