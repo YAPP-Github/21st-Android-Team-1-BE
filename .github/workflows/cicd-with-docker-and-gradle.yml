@@ -23,7 +23,7 @@ jobs:
           security.jwt.token.secret-key: ${{ secrets.JWT_SECRETKEY }}
           security.jwt.token.access-token-expire-time: ${{ secrets.JWT_ACCESSTOKEN_EXPIRE_TIME }}
           security.jwt.token.refresh-token-expire-time: ${{ secrets.JWT_REFRESH_EXPIRE_TIME }}
-          redis.host: ${{ secrets.REDIS_HOST }}
+          spring.redis.host: ${{ secrets.REDIS_HOST }}
 
       - name: Setup Java JDK
         uses: actions/setup-java@v1
