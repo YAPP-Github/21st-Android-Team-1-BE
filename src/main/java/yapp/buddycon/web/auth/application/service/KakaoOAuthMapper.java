@@ -25,17 +25,11 @@ public class KakaoOAuthMapper {
 
   @JsonIgnoreProperties(ignoreUnknown = true)
   record Kakao(
-    Long id,
-    KakaoNickname properties
+    Long id
   ){
     public OAuthMemberInfo toOAuthMember(){
-      return new OAuthMemberInfo(id, properties().nickname());
+      return new OAuthMemberInfo(id);
     }
   }
-
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  record KakaoNickname(
-    String nickname
-  ){}
 
 }

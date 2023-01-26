@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
+import yapp.buddycon.web.auth.adapter.in.request.KakaoInfoRequestDto;
 import yapp.buddycon.web.auth.adapter.in.request.ReissueRequestDto;
 import yapp.buddycon.web.auth.application.port.out.AuthToMemberCommandPort;
 import yapp.buddycon.web.auth.application.port.out.AuthToMemberQueryPort;
@@ -26,15 +27,15 @@ public class AuthService implements AuthUseCase {
   private final AuthToMemberCommandPort authToMemberCommandPort;
 
   @Transactional
-  public TokenResponseDto login(String accessToken) {
-    OAuthMemberInfo oAuthMemberInfo = kakaoOAuthMapper.getUserAttributes(accessToken);
+  public TokenResponseDto login(KakaoInfoRequestDto kakaoInfoRequestDto) {
+    OAuthMemberInfo oAuthMemberInfo = kakaoOAuthMapper.getUserAttributes(kakaoInfoRequestDto.accessToken());
     Member member = authToMemberQueryPort.findMemberByClientId(oAuthMemberInfo.id());
-    if (member == null) member = signup(oAuthMemberInfo);
+    if (member == null) member = signup(oAuthMemberInfo, kakaoInfoRequestDto);
     return tokenProvider.createToken(member.getId());
   }
 
-  private Member signup(OAuthMemberInfo oAuthMemberInfo) {
-    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), oAuthMemberInfo.nickname()));
+  private Member signup(OAuthMemberInfo oAuthMemberInfo, KakaoInfoRequestDto kakaoInfoRequestDto) {
+    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.nickname(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange()));
   }
 
   @Transactional
