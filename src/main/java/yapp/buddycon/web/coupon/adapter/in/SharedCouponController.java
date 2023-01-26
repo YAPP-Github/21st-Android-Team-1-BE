@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/coupon/share/")
+@RequestMapping("api/v1/coupon/share")
 public class SharedCouponController {
 
   private final SharedCouponUseCase sharedCouponUseCase;
@@ -25,13 +25,13 @@ public class SharedCouponController {
     return null;
   }
 
-  @PatchMapping("{id}/state")
+  @PatchMapping("/{id}/state")
   @Operation(summary = "제작티콘 선물 후 공유완료 상태로 변경", description = "카카오톡으로 메시지를 보내기를 성공한 경우 api")
   public DefaultResponseDto changeCustomCouponState(@PathVariable("id") long id) {
     return null;
   }
 
-  @DeleteMapping("{id}")
+  @DeleteMapping("/{id}")
   @Operation(summary = "만든쿠폰 삭제")
   public DefaultResponseDto deleteSharedCoupon(@PathVariable("id") long id) {
     return null;
