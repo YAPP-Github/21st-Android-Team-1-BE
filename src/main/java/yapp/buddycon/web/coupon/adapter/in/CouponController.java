@@ -25,13 +25,13 @@ public class CouponController {
   @GetMapping("/gifticon")
   @Operation(summary = "기프티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedGifticons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedGifticons(usable, pageable, authMember);
   }
 
   @GetMapping("/custom-coupon")
   @Operation(summary = "제작티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedCustomCoupons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedCustomCoupons(usable, pageable, authMember);
   }
 
   @GetMapping("/gifticon/{id}")
