@@ -1,6 +1,5 @@
 package yapp.buddycon.batch.job;
 
-import java.time.LocalDate;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -42,6 +41,7 @@ public class NotificationChunkJob {
     // TODO
     //  - 코드 중복 제거 How..?
     //  - 성능 최적화 (Paging Query) https://youtu.be/2IIwQDIi3ys
+    //  - 전반적인 Naming 수정
 
     Step stepForFourteenDaysLeft = stepBuilderFactory.get("stepForFourteenDaysLeft")
         .<CouponForBatchVo, NotificationForBatchVo> chunk(CHUNK_SIZE)

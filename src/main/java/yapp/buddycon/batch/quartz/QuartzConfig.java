@@ -8,17 +8,17 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import yapp.buddycon.batch.job.NotificationJob;
+import yapp.buddycon.batch.job.NotificationQuartzJob;
 
 @Configuration
 public class QuartzConfig {
 
   @Bean
   public JobDetail NotificationJobDetail() {
-    return JobBuilder.newJob().ofType(NotificationJob.class)
+    return JobBuilder.newJob().ofType(NotificationQuartzJob.class)
         .storeDurably()
         .withIdentity("Notification Job Detail")
-        .withDescription("Notification Job Detail Desc")
+        .withDescription("Notification Job Detail Description")
         .build();
   }
 
@@ -26,8 +26,8 @@ public class QuartzConfig {
   public Trigger customJobTrigger(JobDetail customJobDetail) {
     return TriggerBuilder.newTrigger().forJob(customJobDetail)
         .withIdentity("Notification Job Trigger")
-        .withDescription("Notification Job Trigger Desc")
-        .withSchedule(cronSchedule("*/10 * * * * ?"))
+        .withDescription("Notification Job Trigger Description")
+        .withSchedule(cronSchedule("0 0 11 * * ?"))
         .build();
   }
 

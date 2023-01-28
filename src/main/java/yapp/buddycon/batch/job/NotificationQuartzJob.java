@@ -16,7 +16,7 @@ import yapp.buddycon.config.BeanUtil;
 @PersistJobDataAfterExecution
 @DisallowConcurrentExecution
 @RequiredArgsConstructor
-public class NotificationJob implements Job {
+public class NotificationQuartzJob implements Job {
 
   private final JobLauncher jobLauncher;
   private final BeanUtil beanUtil;
@@ -25,7 +25,7 @@ public class NotificationJob implements Job {
   @Override
   public void execute(JobExecutionContext context) throws JobExecutionException {
     String now = LocalDateTime.now().toString();
-    System.out.println("Notification Job start : " + now);
+    System.out.println("Notification_Quartz_Job Start : " + now);
 
     JobParameters parameters = new JobParametersBuilder()
         .addString("requestDate", now)
