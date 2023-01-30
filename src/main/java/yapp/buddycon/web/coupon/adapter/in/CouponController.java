@@ -37,13 +37,13 @@ public class CouponController {
   @GetMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 상세 조회")
   public GifticonInfoResponseDto getGifticonInfo(@PathVariable("id") long id, AuthMember authMember) {
-    return null;
+    return couponUseCase.getGifticonInfo(authMember.id(), id);
   }
 
   @GetMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 상세 조회")
   public CustomCouponInfoResponseDto getCustomCouponInfo(@PathVariable("id") long id, AuthMember authMember) {
-    return null;
+    return couponUseCase.getCustomCouponInfo(authMember.id(), id);
   }
 
   @PatchMapping("/{id}/state")
