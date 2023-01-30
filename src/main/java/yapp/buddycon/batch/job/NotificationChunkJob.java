@@ -26,7 +26,7 @@ public class NotificationChunkJob {
   private final StepBuilderFactory stepBuilderFactory;
   private final DataSource dataSource;
 
-  private final int CHUNK_SIZE = 5;
+  private final int CHUNK_SIZE = 50;
   private final String BASIC_QUERY_FOR_GET_COUPONS =
       "SELECT c.id, c.name, c.expire_date, c.member_id"
           + " FROM coupon AS c"
