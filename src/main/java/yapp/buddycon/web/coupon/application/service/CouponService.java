@@ -1,7 +1,9 @@
 package yapp.buddycon.web.coupon.application.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
@@ -20,14 +22,18 @@ public class CouponService implements CouponUseCase {
 
   @Override
   public List<CouponsResponseDto> getSortedGifticons(boolean usable, Pageable pageable, AuthMember authMember) {
-    if(usable) return couponQueryPort.findUsableGifticonsSortedBy(pageable, authMember.id());
-    return couponQueryPort.findUsedGifticonsSortedBy(pageable, authMember.id());
+    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString());
+    PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+    if(usable) return couponQueryPort.findUsableGifticonsSortedBy(pageRequest, authMember.id());
+    return couponQueryPort.findUsedGifticonsSortedBy(pageRequest, authMember.id());
   }
 
   @Override
   public List<CouponsResponseDto> getSortedCustomCoupons(boolean usable, Pageable pageable, AuthMember authMember) {
-    if(usable) return couponQueryPort.findUsableCustomCouponsSortedBy(pageable, authMember.id());
-    return couponQueryPort.findUsedCustomCouponsSortedBy(pageable, authMember.id());
+    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString());
+    PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+    if(usable) return couponQueryPort.findUsableCustomCouponsSortedBy(pageRequest, authMember.id());
+    return couponQueryPort.findUsedCustomCouponsSortedBy(pageRequest, authMember.id());
   }
 
   /*
