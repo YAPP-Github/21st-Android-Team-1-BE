@@ -3,6 +3,7 @@ package yapp.buddycon.batch.job;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -13,6 +14,7 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import yapp.buddycon.config.BeanUtil;
 
+@Slf4j
 @PersistJobDataAfterExecution
 @DisallowConcurrentExecution
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class NotificationQuartzJob implements Job {
   @Override
   public void execute(JobExecutionContext context) throws JobExecutionException {
     String now = LocalDateTime.now().toString();
-    System.out.println("Notification_Quartz_Job Start : " + now);
+    log.info("Notification_Quartz_Job Start : {}", now);
 
     JobParameters parameters = new JobParametersBuilder()
         .addString("requestDate", now)
