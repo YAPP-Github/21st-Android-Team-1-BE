@@ -36,19 +36,19 @@ public class CouponController {
 
   @GetMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 상세 조회")
-  public GifticonInfoResponseDto getGifticonInfo(@PathVariable("id") long id) {
+  public GifticonInfoResponseDto getGifticonInfo(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 
   @GetMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 상세 조회")
-  public CustomCouponInfoResponseDto getCustomCouponInfo(@PathVariable("id") long id) {
+  public CustomCouponInfoResponseDto getCustomCouponInfo(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 
   @PatchMapping("/{id}/state")
   @Operation(summary = "쿠폰 상태 변경", description = "상태 : USED, USABLE")
-  public DefaultResponseDto changeCouponState(@PathVariable("id") long id, @RequestBody CouponStateRequestDto couponStateRequestDto) {
+  public DefaultResponseDto changeCouponState(@PathVariable("id") long id, @RequestBody CouponStateRequestDto couponStateRequestDto, AuthMember authMember) {
     return null;
   }
 
@@ -78,19 +78,19 @@ public class CouponController {
 
   @DeleteMapping("/{id}")
   @Operation(summary = "쿠폰 삭제")
-  public DefaultResponseDto deleteCoupon(@PathVariable("id") long id) {
+  public DefaultResponseDto deleteCoupon(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 
   @PutMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 정보 수정")
-  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoRequestDto gifticonInfoRequestDto) {
+  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoRequestDto gifticonInfoRequestDto, AuthMember authMember) {
     return null;
   }
 
   @PutMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 정보 수정")
-  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoRequestDto customCouponInfoRequestDto) {
+  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoRequestDto customCouponInfoRequestDto, AuthMember authMember) {
     return null;
   }
 
