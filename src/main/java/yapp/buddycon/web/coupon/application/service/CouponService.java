@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
@@ -46,5 +47,11 @@ public class CouponService implements CouponUseCase {
   @Override
   public CustomCouponInfoResponseDto getCustomCouponInfo(Long memberId, Long couponId) {
     return couponQueryPort.findCustomCouponInfo(memberId, couponId);
+  }
+
+  @Override
+  public DefaultResponseDto deleteCoupon(Long memberId, Long couponId) {
+    couponCommandPort.deleteCoupon(memberId, couponId);
+    return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
   }
 }

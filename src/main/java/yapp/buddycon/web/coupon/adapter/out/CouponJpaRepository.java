@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
@@ -50,4 +51,6 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
   """)
   CustomCouponInfoResponseDto findCustomCouponByMemberIdAndIdAndCouponType(Long memberId, Long id);
 
+  @Transactional
+  void deleteByIdAndMemberId(Long id, Long memberId);
 }

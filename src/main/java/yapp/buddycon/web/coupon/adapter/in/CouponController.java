@@ -79,7 +79,7 @@ public class CouponController {
   @DeleteMapping("/{id}")
   @Operation(summary = "쿠폰 삭제")
   public DefaultResponseDto deleteCoupon(@PathVariable("id") long id, AuthMember authMember) {
-    return null;
+    return couponUseCase.deleteCoupon(authMember.id(), id);
   }
 
   @PutMapping("/gifticon/{id}")
