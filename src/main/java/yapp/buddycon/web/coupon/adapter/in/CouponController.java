@@ -25,13 +25,13 @@ public class CouponController {
   @GetMapping("/gifticon")
   @Operation(summary = "기프티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedGifticons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedGifticons(usable, pageable, authMember);
   }
 
   @GetMapping("/custom-coupon")
   @Operation(summary = "제작티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedCustomCoupons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedCustomCoupons(usable, pageable, authMember);
   }
 
   @GetMapping("/gifticon/{id}")
@@ -64,15 +64,15 @@ public class CouponController {
     return null;
   }
 
-  @GetMapping("/gifticon/{barcode}")
+  @GetMapping("/gifticon/info")
   @Operation(summary = "바코드로 기프티콘 정보 불러오기")
-  public GifticonInfoResponseDto getGifticonInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
+  public GifticonInfoResponseDto getGifticonInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
     return null;
   }
 
-  @GetMapping("/custom-coupon/{barcode}")
+  @GetMapping("/custom-coupon/info")
   @Operation(summary = "바코드로 제작티콘 정보 불러오기")
-  public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
+  public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
     return null;
   }
 

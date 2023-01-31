@@ -21,6 +21,8 @@ public enum ErrorCode {
   LOGGED_OUT_MEMBER(BAD_REQUEST, "로그아웃된 사용자입니다."),
   TOKEN_MEMBER_INFO_IS_NOT_MATCH(BAD_REQUEST, "토큰의 사용자 정보가 일치하지 않습니다."),
 
+  INVALID_SORT_PROPERTY(BAD_REQUEST, "잘못된 sort 방식입니다."),
+
   ;
 
   private final HttpStatus httpStatus;
