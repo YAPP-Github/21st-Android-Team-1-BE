@@ -51,6 +51,5 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
   """)
   CustomCouponInfoResponseDto findCustomCouponByMemberIdAndIdAndCouponType(Long memberId, Long id);
 
-  @Transactional
   void deleteByIdAndMemberId(Long id, Long memberId);
 }
