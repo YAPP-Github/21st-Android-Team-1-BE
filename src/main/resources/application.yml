@@ -25,6 +25,12 @@ spring:
     host:
     port: 6379
 
+  batch:
+    job:
+      enabled: false  # 어플리케이션 실행 시 등록된 JOB 실행 여부
+    jdbc:
+      initialize-schema: always # Batch DB 초기화
+
 security:
   jwt:
     token:

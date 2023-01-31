@@ -25,30 +25,30 @@ public class CouponController {
   @GetMapping("/gifticon")
   @Operation(summary = "기프티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedGifticons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedGifticons(usable, pageable, authMember);
   }
 
   @GetMapping("/custom-coupon")
   @Operation(summary = "제작티콘 정렬 조회")
   public List<CouponsResponseDto> getSortedCustomCoupons(@RequestParam("usable") boolean usable, Pageable pageable, AuthMember authMember) {
-    return null;
+    return couponUseCase.getSortedCustomCoupons(usable, pageable, authMember);
   }
 
   @GetMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 상세 조회")
-  public GifticonInfoResponseDto getGifticonInfo(@PathVariable("id") long id) {
-    return null;
+  public GifticonInfoResponseDto getGifticonInfo(@PathVariable("id") long id, AuthMember authMember) {
+    return couponUseCase.getGifticonInfo(authMember.id(), id);
   }
 
   @GetMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 상세 조회")
-  public CustomCouponInfoResponseDto getCustomCouponInfo(@PathVariable("id") long id) {
-    return null;
+  public CustomCouponInfoResponseDto getCustomCouponInfo(@PathVariable("id") long id, AuthMember authMember) {
+    return couponUseCase.getCustomCouponInfo(authMember.id(), id);
   }
 
   @PatchMapping("/{id}/state")
   @Operation(summary = "쿠폰 상태 변경", description = "상태 : USED, USABLE")
-  public DefaultResponseDto changeCouponState(@PathVariable("id") long id, @RequestBody CouponStateRequestDto couponStateRequestDto) {
+  public DefaultResponseDto changeCouponState(@PathVariable("id") long id, @RequestBody CouponStateRequestDto couponStateRequestDto, AuthMember authMember) {
     return null;
   }
 
@@ -64,33 +64,33 @@ public class CouponController {
     return null;
   }
 
-  @GetMapping("/gifticon/{barcode}")
+  @GetMapping("/gifticon/info")
   @Operation(summary = "바코드로 기프티콘 정보 불러오기")
-  public GifticonInfoResponseDto getGifticonInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
+  public GifticonInfoResponseDto getGifticonInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
     return null;
   }
 
-  @GetMapping("/custom-coupon/{barcode}")
+  @GetMapping("/custom-coupon/info")
   @Operation(summary = "바코드로 제작티콘 정보 불러오기")
-  public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@PathVariable("barcode") String barcode, AuthMember authMember) {
+  public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
     return null;
   }
 
   @DeleteMapping("/{id}")
   @Operation(summary = "쿠폰 삭제")
-  public DefaultResponseDto deleteCoupon(@PathVariable("id") long id) {
+  public DefaultResponseDto deleteCoupon(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 
   @PutMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 정보 수정")
-  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoRequestDto gifticonInfoRequestDto) {
+  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoRequestDto gifticonInfoRequestDto, AuthMember authMember) {
     return null;
   }
 
   @PutMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 정보 수정")
-  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoRequestDto customCouponInfoRequestDto) {
+  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoRequestDto customCouponInfoRequestDto, AuthMember authMember) {
     return null;
   }
 
