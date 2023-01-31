@@ -3,10 +3,13 @@ package yapp.buddycon.web.coupon.adapter.out;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import yapp.buddycon.common.exception.CustomException;
+import yapp.buddycon.common.exception.ErrorCode;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
+import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.domain.CouponState;
 
 import java.util.List;
@@ -46,5 +49,10 @@ public class CouponQueryRepository implements CouponQueryPort {
   @Override
   public CustomCouponInfoResponseDto findCustomCouponInfo(Long memberId, Long couponId) {
     return couponJpaRepository.findCustomCouponByMemberIdAndIdAndCouponType(memberId, couponId);
+  }
+
+  @Override
+  public Coupon findById(Long id) {
+    return couponJpaRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
   }
 }

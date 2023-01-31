@@ -1,6 +1,7 @@
 package yapp.buddycon.web.coupon.application.port.in;
 
 import org.springframework.data.domain.Pageable;
+import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 
@@ -19,4 +20,6 @@ public interface CouponUseCase {
   GifticonInfoResponseDto getGifticonInfo(Long memberId, Long couponId);
 
   CustomCouponInfoResponseDto getCustomCouponInfo(Long memberId, Long couponId);
+
+  DefaultResponseDto deleteCoupon(Long memberId, Long couponId);
 }
