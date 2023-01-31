@@ -7,6 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.CouponUseCase;
 import yapp.buddycon.web.coupon.application.port.out.CouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
@@ -36,11 +38,13 @@ public class CouponService implements CouponUseCase {
     return couponQueryPort.findUsedCustomCouponsSortedBy(pageRequest, authMember.id());
   }
 
-  /*
-  유효기간순 -> expireDate ASC
-  등록순 -> createdAt ASC
-  이름순 -> name ASC
-  page=3&size=10&sort=couponInfo.expireDate,DESC
-  */
+  @Override
+  public GifticonInfoResponseDto getGifticonInfo(Long memberId, Long couponId) {
+    return couponQueryPort.findGifticonInfo(memberId, couponId);
+  }
 
+  @Override
+  public CustomCouponInfoResponseDto getCustomCouponInfo(Long memberId, Long couponId) {
+    return couponQueryPort.findCustomCouponInfo(memberId, couponId);
+  }
 }

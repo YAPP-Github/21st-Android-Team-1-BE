@@ -10,8 +10,12 @@ import yapp.buddycon.web.auth.adapter.out.AuthMember;
 public class HelloController {
 
   @GetMapping
-  public String hello(AuthMember authMember) {
-    return "hi buddy" + authMember.id() + "~";
+  public HelloResponseDto hello(AuthMember authMember) {
+    return new HelloResponseDto("hello! your id is " + authMember.id());
   }
+
+  record HelloResponseDto(
+    String message
+  ){}
 
 }

@@ -13,7 +13,7 @@ import yapp.buddycon.common.domain.BaseEntity;
 public class NotificationSetting extends BaseEntity {
 
   @OneToOne
-  @JoinColumn(name = "member_id")
+  @JoinColumn(name = "member_id", nullable = false)
   private Member member;
 
   private boolean activate;

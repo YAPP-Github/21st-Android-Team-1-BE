@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
 import yapp.buddycon.web.coupon.domain.CouponState;
 
@@ -36,4 +38,13 @@ public class CouponQueryRepository implements CouponQueryPort {
   }
 
 
+  @Override
+  public GifticonInfoResponseDto findGifticonInfo(Long memberId, Long couponId) {
+    return couponJpaRepository.findGifticonByMemberIdAndIdAndCouponType(memberId, couponId);
+  }
+
+  @Override
+  public CustomCouponInfoResponseDto findCustomCouponInfo(Long memberId, Long couponId) {
+    return couponJpaRepository.findCustomCouponByMemberIdAndIdAndCouponType(memberId, couponId);
+  }
 }
