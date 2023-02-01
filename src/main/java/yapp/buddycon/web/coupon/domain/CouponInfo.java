@@ -3,8 +3,10 @@ package yapp.buddycon.web.coupon.domain;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
+import lombok.Getter;
 
 @Embeddable
+@Getter
 public class CouponInfo {
 
   @Column(name = "barcode", nullable = false)

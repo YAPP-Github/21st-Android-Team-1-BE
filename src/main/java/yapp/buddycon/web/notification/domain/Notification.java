@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
 import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.member.domain.Member;
 
 @Entity
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Notification extends BaseEntity {
@@ -31,4 +33,11 @@ public class Notification extends BaseEntity {
   @JoinColumn(name = "coupon_id")
   private Coupon coupon;
 
+  public boolean checkAuth(long memberId) {
+    // 공지사항인 경우 member = null
+    if (member != null) {
+      return member.getId() == memberId;
+    }
+    return true;
+  }
 }

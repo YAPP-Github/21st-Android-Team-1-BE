@@ -1,6 +1,7 @@
 package yapp.buddycon.web.coupon.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
 import yapp.buddycon.web.member.domain.Member;
@@ -8,6 +9,7 @@ import yapp.buddycon.web.member.domain.Member;
 import javax.persistence.*;
 
 @Entity
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Coupon extends BaseEntity {
