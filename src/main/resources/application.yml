@@ -45,4 +45,4 @@ springdoc:
     path: /buddycon/swagger-ui.html
     display-request-duration: true
     disable-swagger-default-url: true
-
+    persistAuthorization: true

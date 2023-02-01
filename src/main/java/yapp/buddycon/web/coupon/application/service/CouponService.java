@@ -5,6 +5,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
@@ -12,6 +14,7 @@ import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.CouponUseCase;
 import yapp.buddycon.web.coupon.application.port.out.CouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
+import yapp.buddycon.web.coupon.domain.Coupon;
 
 import java.util.List;
 
@@ -46,5 +49,13 @@ public class CouponService implements CouponUseCase {
   @Override
   public CustomCouponInfoResponseDto getCustomCouponInfo(Long memberId, Long couponId) {
     return couponQueryPort.findCustomCouponInfo(memberId, couponId);
+  }
+
+  @Override
+  @Transactional
+  public DefaultResponseDto deleteCoupon(Long memberId, Long couponId) {
+    Coupon coupon = couponQueryPort.findById(couponId);
+    couponCommandPort.deleteCoupon(memberId, coupon.getId());
+    return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
   }
 }
