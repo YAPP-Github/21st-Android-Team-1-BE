@@ -1,8 +1,12 @@
 package yapp.buddycon.web.coupon.domain;
 
 
+import yapp.buddycon.web.member.domain.Member;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,8 +19,9 @@ public class SharedCouponInfo {
   @Column(name = "image_url", nullable = false)
   private String imageUrl;
 
-  @Column(name = "sent_member_id", nullable = false)
-  private long sentMemberId;
+  @OneToOne
+  @JoinColumn(name = "member_id", nullable = false)
+  private Member sentMember;
 
   @Column(name = "name", nullable = false, length = 16)
   private String name;
