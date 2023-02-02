@@ -8,9 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.request.*;
-import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.*;
 import yapp.buddycon.web.coupon.application.port.in.CouponUseCase;
 
 import java.util.List;
@@ -66,14 +64,14 @@ public class CouponController {
 
   @GetMapping("/gifticon/info")
   @Operation(summary = "바코드로 기프티콘 정보 불러오기")
-  public GifticonInfoResponseDto getGifticonInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
-    return null;
+  public SharedGifticonInfoResponseDto getGifticonInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
+    return couponUseCase.getSharedGifticonInfoFromBarcode(barcode);
   }
 
   @GetMapping("/custom-coupon/info")
   @Operation(summary = "바코드로 제작티콘 정보 불러오기")
-  public CustomCouponInfoResponseDto getCustomCouponInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
-    return null;
+  public SharedCustomCouponResponseDto getCustomCouponInfoByBarcode(@RequestParam("barcode") String barcode, AuthMember authMember) {
+    return couponUseCase.getSharedCustomCouponInfoFromBarcode(barcode);
   }
 
   @DeleteMapping("/{id}")

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @Getter
 @AllArgsConstructor
@@ -29,6 +30,8 @@ public enum ErrorCode {
 
   /* 403 FORBIDDEN */
   CANT_ACCESS_NOTIFICATION(FORBIDDEN, "해당 알림에 대한 권한이 없습니다."),
+
+  NOT_EXIST_BARCODE_NUMBER(NO_CONTENT, "바코드에 해당하는 쿠폰이 존재하지 않습니다"),
 
   ;
 

@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
-import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.response.*;
 import yapp.buddycon.web.coupon.application.port.in.CouponUseCase;
 import yapp.buddycon.web.coupon.application.port.out.CouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
 import yapp.buddycon.web.coupon.domain.Coupon;
+import yapp.buddycon.web.coupon.application.port.out.CouponToSharedCouponQueryPort;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class CouponService implements CouponUseCase {
 
   private final CouponCommandPort couponCommandPort;
   private final CouponQueryPort couponQueryPort;
+  private final CouponToSharedCouponQueryPort couponToSharedCouponQueryPort;
 
   @Override
   public List<CouponsResponseDto> getSortedGifticons(boolean usable, Pageable pageable, AuthMember authMember) {
@@ -57,5 +57,15 @@ public class CouponService implements CouponUseCase {
     Coupon coupon = couponQueryPort.findById(couponId);
     couponCommandPort.deleteCoupon(memberId, coupon.getId());
     return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
+  }
+
+  @Override
+  public SharedGifticonInfoResponseDto getSharedGifticonInfoFromBarcode(String barcode) {
+    return couponToSharedCouponQueryPort.findSharedGifticonByBarcode(barcode);
+  }
+
+  @Override
+  public SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode) {
+    return couponToSharedCouponQueryPort.findSharedCustomCouponByBarcode(barcode);
   }
 }
