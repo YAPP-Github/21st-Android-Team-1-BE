@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public record SharedCouponsResponseDto(
   Long id,
-  String path,
+  String imageUrl,
   String name,
   LocalDate expireDate,
   boolean shared
