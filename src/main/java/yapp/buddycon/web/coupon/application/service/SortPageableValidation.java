@@ -7,6 +7,7 @@ import yapp.buddycon.common.exception.ErrorCode;
 import java.util.Arrays;
 
 public enum SortPageableValidation {
+  UNSHARED_ASC_SORT("createdAt: DESC", Sort.by("createdAt").descending()),
   CREATED_AT_ASC_SORT("createdAt: ASC", Sort.by("createdAt").ascending()),
   EXPIRE_DATE_ASC_SORT("expireDate: ASC", Sort.by("couponInfo.expireDate").ascending()),
   NAME_ASC_SORT("name: ASC", Sort.by("couponInfo.name").ascending());
