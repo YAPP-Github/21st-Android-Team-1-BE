@@ -21,19 +21,19 @@ public class SharedCouponController {
 
   @GetMapping("")
   @Operation(summary = "만든쿠폰 정렬 조회")
-  public List<SharedCouponsResponseDto> getSortedSharedCoupons(Pageable pageable) {
-    return null;
+  public List<SharedCouponsResponseDto> getSortedSharedCoupons(@RequestParam("unshared") boolean unshared, Pageable pageable, AuthMember authMember) {
+    return sharedCouponUseCase.getSortedSharedCoupons(unshared, pageable, authMember.id());
   }
 
   @PatchMapping("/{id}/state")
   @Operation(summary = "제작티콘 선물 후 공유완료 상태로 변경", description = "카카오톡으로 메시지를 보내기를 성공한 경우 api")
-  public DefaultResponseDto changeCustomCouponState(@PathVariable("id") long id) {
+  public DefaultResponseDto changeCustomCouponState(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 
   @DeleteMapping("/{id}")
   @Operation(summary = "만든쿠폰 삭제")
-  public DefaultResponseDto deleteSharedCoupon(@PathVariable("id") long id) {
+  public DefaultResponseDto deleteSharedCoupon(@PathVariable("id") long id, AuthMember authMember) {
     return null;
   }
 }
