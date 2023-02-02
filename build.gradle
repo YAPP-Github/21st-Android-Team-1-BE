@@ -51,6 +51,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	testImplementation 'org.springframework.batch:spring-batch-test'
 
+	// AWS S3
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
+
 	// webclient
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 }

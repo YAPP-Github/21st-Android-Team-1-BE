@@ -20,7 +20,11 @@ spring:
     url:
     username:
     password:
-
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 100MB
   redis:
     host:
     port: 6379
@@ -46,3 +50,15 @@ springdoc:
     display-request-duration: true
     disable-swagger-default-url: true
     persistAuthorization: true
+
+# S3
+cloud:
+  aws:
+    region:
+    credentials:
+      accessKey:
+      secretKey:
+  s3:
+    bucket:
+    path:
+      root:
