@@ -27,6 +27,7 @@ public enum ErrorCode {
 
   INVALID_COUPON_ID(BAD_REQUEST, "해당 쿠폰 id가 존재하지 않습니다."),
   INVALID_NOTIFICATION_ID(BAD_REQUEST, "해당 알림 id가 존재하지 않습니다."),
+  INVALID_MEMBER_ID(BAD_REQUEST, "해당 회원 id가 존재하지 않습니다."),
 
   /* 403 FORBIDDEN */
   CANT_ACCESS_NOTIFICATION(FORBIDDEN, "해당 알림에 대한 권한이 없습니다."),

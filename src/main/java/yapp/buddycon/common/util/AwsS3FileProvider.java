@@ -9,10 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3Port;
 
 @RequiredArgsConstructor
 @Component
-public class AwsS3FileProvider {
+public class AwsS3FileProvider implements CouponToAwsS3Port {
 
   private final AmazonS3 s3Client;
 
@@ -21,6 +22,7 @@ public class AwsS3FileProvider {
   @Value("${cloud.s3.path.root}")
   private String PATH_ROOT;
 
+  @Override
   public String upload(MultipartFile file) throws IOException {
     String s3PathKey = PATH_ROOT + "/" + UuidProvider.generateUuid();
     ObjectMetadata metaData = new ObjectMetadata();

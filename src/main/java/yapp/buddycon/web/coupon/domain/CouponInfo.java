@@ -3,10 +3,17 @@ package yapp.buddycon.web.coupon.domain;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import yapp.buddycon.web.coupon.adapter.in.request.GifticonCreationRequestDto;
 
 @Embeddable
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CouponInfo {
 
   @Column(name = "barcode", nullable = false)
@@ -35,5 +42,18 @@ public class CouponInfo {
 
   @Column(name = "expire_date")
   private LocalDate expireDate;
+
+  public static CouponInfo valueOf(GifticonCreationRequestDto dto, String imageUrl) {
+    return CouponInfo.builder()
+        .barcode(dto.barcode())
+        .imageUrl(imageUrl)
+        .name(dto.name())
+        .memo(dto.memo())
+        .storeName(dto.storeName())
+        .isMoneyCoupon(dto.isMoneyCoupon())
+        .leftMoney(dto.leftMoney())
+        .expireDate(dto.expireDate())
+        .build();
+  }
 
 }
