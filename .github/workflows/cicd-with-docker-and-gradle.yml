@@ -24,6 +24,11 @@ jobs:
           security.jwt.token.access-token-expire-time: ${{ secrets.JWT_ACCESSTOKEN_EXPIRE_TIME }}
           security.jwt.token.refresh-token-expire-time: ${{ secrets.JWT_REFRESH_EXPIRE_TIME }}
           spring.redis.host: ${{ secrets.REDIS_HOST }}
+          cloud.aws.region: ${{ secrets.AWS_S3_REGION }}
+          cloud.aws.credentials.accessKey: ${{ secrets.AWS_S3_ACCESSKEY }}
+          cloud.aws.credentials.secretKey: ${{ secrets.AWS_S3_SECRETKEY }}
+          cloud.s3.bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          cloud.s3.path.root: ${{ secrets.AWS_S3_ROOT_PATH }}
 
       - name: Setup Java JDK
         uses: actions/setup-java@v1
