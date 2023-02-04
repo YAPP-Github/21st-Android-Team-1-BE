@@ -21,6 +21,8 @@ public class AwsS3FileProvider implements CouponToAwsS3Port {
   private String BUCKET_NAME;
   @Value("${cloud.s3.path.root}")
   private String PATH_ROOT;
+  @Value("${cloud.s3.path.url}")
+  private String PATH_URL;
 
   @Override
   public String upload(MultipartFile file) throws IOException {
@@ -30,7 +32,7 @@ public class AwsS3FileProvider implements CouponToAwsS3Port {
     metaData.setContentType(file.getContentType());
     PutObjectResult result = s3Client
         .putObject(new PutObjectRequest(BUCKET_NAME, s3PathKey, file.getInputStream(), metaData));
-    return s3PathKey;
+    return PATH_URL + "/" + s3PathKey;
   }
 
 }

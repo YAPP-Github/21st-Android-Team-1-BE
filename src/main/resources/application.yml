@@ -62,3 +62,4 @@ cloud:
     bucket:
     path:
       root:
+      url:

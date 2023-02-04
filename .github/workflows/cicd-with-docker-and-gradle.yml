@@ -29,6 +29,7 @@ jobs:
           cloud.aws.credentials.secretKey: ${{ secrets.AWS_S3_SECRETKEY }}
           cloud.s3.bucket: ${{ secrets.AWS_S3_BUCKET_NAME }}
           cloud.s3.path.root: ${{ secrets.AWS_S3_ROOT_PATH }}
+          cloud.s3.path.url: ${{ secrets.AWS_S3_ROOT_URL }}
 
       - name: Setup Java JDK
         uses: actions/setup-java@v1
