@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @Getter
@@ -25,8 +26,9 @@ public enum ErrorCode {
 
   INVALID_SORT_PROPERTY(BAD_REQUEST, "잘못된 sort 방식입니다."),
 
-  INVALID_COUPON_ID(BAD_REQUEST, "해당 쿠폰 id가 존재하지 않습니다."),
-  INVALID_NOTIFICATION_ID(BAD_REQUEST, "해당 알림 id가 존재하지 않습니다."),
+  INVALID_COUPON_ID(NOT_FOUND, "해당 쿠폰 id가 존재하지 않습니다."),
+  INVALID_NOTIFICATION_ID(NOT_FOUND, "해당 알림 id가 존재하지 않습니다."),
+  NOTIFICATION_SETTING_NOT_FOUND(NOT_FOUND, "해당 알림 설정이 존재하지 않습니다."),
 
   /* 403 FORBIDDEN */
   CANT_ACCESS_NOTIFICATION(FORBIDDEN, "해당 알림에 대한 권한이 없습니다."),
