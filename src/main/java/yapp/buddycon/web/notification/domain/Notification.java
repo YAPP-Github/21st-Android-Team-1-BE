@@ -36,4 +36,8 @@ public class Notification extends BaseEntity {
   public boolean checkAuth(long memberId) {
     return member.getId() == memberId;
   }
+
+  public void setCheckedTrue() {
+    this.checked = true;
+  }
 }
