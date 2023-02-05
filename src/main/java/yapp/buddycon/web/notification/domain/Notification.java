@@ -26,18 +26,14 @@ public class Notification extends BaseEntity {
   private boolean checked;
 
   @ManyToOne
-  @JoinColumn(name = "member_id")
+  @JoinColumn(name = "member_id", nullable = false)
   private Member member;
 
   @ManyToOne
   @JoinColumn(name = "coupon_id")
-  private Coupon coupon;
+  private Coupon coupon;  // null이면 공지사항
 
   public boolean checkAuth(long memberId) {
-    // 공지사항인 경우 member = null
-    if (member != null) {
-      return member.getId() == memberId;
-    }
-    return true;
+    return member.getId() == memberId;
   }
 }
