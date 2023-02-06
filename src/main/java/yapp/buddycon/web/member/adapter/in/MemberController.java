@@ -11,17 +11,19 @@ import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.member.adapter.in.request.NotificationSettingUpdateRequestDto;
 import yapp.buddycon.web.member.adapter.in.response.NotificationSettingResponseDto;
+import yapp.buddycon.web.member.application.port.in.MemberUseCase;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/member")
 public class MemberController {
 
+  private final MemberUseCase memberUseCase;
+
   @GetMapping("/notification-setting")
   @Operation(summary = "유저 알림 설정 조회")
   public NotificationSettingResponseDto getNotificationSetting(AuthMember authMember) {
-    NotificationSettingResponseDto dto = null;
-    return dto;
+    return memberUseCase.getMembersNotificationSetting(authMember.id());
   }
 
   @PatchMapping("/notification-setting")
