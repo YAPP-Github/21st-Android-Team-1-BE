@@ -1,8 +1,6 @@
 package yapp.buddycon.web.coupon.application.service;
 
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,7 +27,6 @@ import yapp.buddycon.web.coupon.domain.CouponInfo;
 import yapp.buddycon.web.coupon.domain.CouponType;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class CouponService implements CouponUseCase {
 
@@ -72,13 +69,7 @@ public class CouponService implements CouponUseCase {
     if (image.isEmpty()) return new DefaultResponseDto(false, "잘못된 이미지입니다.");
 
     // try to upload image
-    String imageUrl;
-    try {
-      imageUrl = couponToAwsS3Port.upload(image);
-    } catch (IOException e) {
-      log.error("AwsS3FileProvider throw IOException : {}", e);
-      return new DefaultResponseDto(false, "이미지 업로드가 실패하었습니다");
-    }
+    String imageUrl = couponToAwsS3Port.upload(image);
 
     // create coupon
     Coupon coupon = Coupon.create(couponToMemberQueryPort.findById(authMember.id()),
