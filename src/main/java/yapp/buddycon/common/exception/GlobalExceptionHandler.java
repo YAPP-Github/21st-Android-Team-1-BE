@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.PersistenceException;
@@ -27,5 +28,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
       .message("database error").build();
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
   }
-}
 
+  @ExceptionHandler(value = { MaxUploadSizeExceededException.class })
+  public ResponseEntity<ErrorResponse> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
+    log.error("handleMaxUploadSizeExceededException throw MaxUploadSizeExceededException : {}", e.getMessage());
+    final ErrorResponse errorResponse = ErrorResponse.builder()
+      .code("MaxUploadSizeExceededException")
+      .message("file size error").build();
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+  }
+
+}
