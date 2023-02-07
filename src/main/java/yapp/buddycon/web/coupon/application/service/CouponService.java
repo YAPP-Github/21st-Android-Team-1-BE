@@ -65,9 +65,6 @@ public class CouponService implements CouponUseCase {
   @Override
   public DefaultResponseDto makeGifticon(GifticonCreationRequestDto gifticonCreationRequestDto,
       MultipartFile image, AuthMember authMember) {
-    // empty file
-    if (image.isEmpty()) return new DefaultResponseDto(false, "잘못된 이미지입니다.");
-
     // try to upload image
     String imageUrl = couponToAwsS3Port.upload(image);
 

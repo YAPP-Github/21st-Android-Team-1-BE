@@ -25,6 +25,7 @@ public enum ErrorCode {
   TOKEN_MEMBER_INFO_IS_NOT_MATCH(BAD_REQUEST, "토큰의 사용자 정보가 일치하지 않습니다."),
 
   FAILED_TO_UPLOAD_IMAGE(BAD_REQUEST, "이미지 업로드가 실패하였습니다."),
+  IMAGE_NOT_FOUND(BAD_REQUEST, "이미지를 찾을 수 없습니다."),
 
   INVALID_SORT_PROPERTY(BAD_REQUEST, "잘못된 sort 방식입니다."),
 
