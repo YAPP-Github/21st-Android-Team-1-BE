@@ -3,6 +3,7 @@ package yapp.buddycon.web.coupon.adapter.in;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
@@ -50,10 +51,10 @@ public class CouponController {
     return null;
   }
 
-  @PostMapping("/gifticon")
+  @PostMapping(value = "/gifticon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "기프티콘 제작")
   public DefaultResponseDto makeGifticon(@RequestPart GifticonCreationRequestDto gifticonCreationRequestDto, @RequestPart MultipartFile image, AuthMember authMember) {
-    return null;
+    return couponUseCase.makeGifticon(gifticonCreationRequestDto, image, authMember);
   }
 
   @PostMapping("/custom-coupon")

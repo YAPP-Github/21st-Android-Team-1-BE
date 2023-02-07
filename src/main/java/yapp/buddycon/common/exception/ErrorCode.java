@@ -24,10 +24,13 @@ public enum ErrorCode {
   LOGGED_OUT_MEMBER(BAD_REQUEST, "로그아웃된 사용자입니다."),
   TOKEN_MEMBER_INFO_IS_NOT_MATCH(BAD_REQUEST, "토큰의 사용자 정보가 일치하지 않습니다."),
 
+  FAILED_TO_UPLOAD_IMAGE(BAD_REQUEST, "이미지 업로드가 실패하였습니다."),
+
   INVALID_SORT_PROPERTY(BAD_REQUEST, "잘못된 sort 방식입니다."),
 
   INVALID_COUPON_ID(NOT_FOUND, "해당 쿠폰 id가 존재하지 않습니다."),
   INVALID_NOTIFICATION_ID(NOT_FOUND, "해당 알림 id가 존재하지 않습니다."),
+  INVALID_MEMBER_ID(BAD_REQUEST, "해당 회원 id가 존재하지 않습니다."),
   NOTIFICATION_SETTING_NOT_FOUND(NOT_FOUND, "해당 알림 설정이 존재하지 않습니다."),
 
   INVALID_PAGE(BAD_REQUEST, "올바르지 않은 page 입니다."),
