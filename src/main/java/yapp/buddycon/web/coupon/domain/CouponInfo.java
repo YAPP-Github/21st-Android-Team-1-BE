@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.GifticonCreationRequestDto;
 
 @Embeddable
@@ -53,6 +54,18 @@ public class CouponInfo {
         .isMoneyCoupon(dto.isMoneyCoupon())
         .leftMoney(dto.leftMoney())
         .expireDate(dto.expireDate())
+        .build();
+  }
+
+  public static CouponInfo valueOf(CustomCouponCreationRequestDto dto, String imageUrl) {
+    return CouponInfo.builder()
+        .barcode(dto.barcode())
+        .imageUrl(imageUrl)
+        .name(dto.name())
+        .memo(dto.memo())
+        .storeName(dto.storeName())
+        .expireDate(dto.expireDate())
+        .sentMemberName(dto.sentMemberName())
         .build();
   }
 

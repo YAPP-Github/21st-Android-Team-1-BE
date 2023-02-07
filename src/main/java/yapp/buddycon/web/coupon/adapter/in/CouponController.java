@@ -57,10 +57,10 @@ public class CouponController {
     return couponUseCase.makeGifticon(gifticonCreationRequestDto, image, authMember);
   }
 
-  @PostMapping("/custom-coupon")
+  @PostMapping(value = "/custom-coupon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "제작티콘 제작")
   public DefaultResponseDto makeCustomCoupon(@RequestPart CustomCouponCreationRequestDto customCouponCreationRequestDto, @RequestPart MultipartFile image, AuthMember authMember) {
-    return null;
+    return couponUseCase.makeCustomCoupon(customCouponCreationRequestDto, image, authMember);
   }
 
   @GetMapping("/gifticon/info")

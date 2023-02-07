@@ -7,6 +7,7 @@ public record CustomCouponCreationRequestDto(
   String name,
   LocalDate expireDate,
   String storeName,
-  String memo
+  String memo,
+  String sentMemberName
 ) {
 }

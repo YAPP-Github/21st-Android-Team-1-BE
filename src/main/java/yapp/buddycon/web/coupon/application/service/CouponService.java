@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
+import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.*;
 import yapp.buddycon.web.coupon.adapter.in.request.GifticonCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
@@ -75,6 +76,21 @@ public class CouponService implements CouponUseCase {
     couponCommandPort.createCoupon(coupon);
 
     return new DefaultResponseDto(true, "기프티콘이 생성되었습니다.");
+  }
+
+  @Override
+  public DefaultResponseDto makeCustomCoupon(
+      CustomCouponCreationRequestDto customCouponCreationRequestDto, MultipartFile image, AuthMember authMember) {
+    // try to upload image
+    String imageUrl = couponToAwsS3Port.upload(image);
+
+    // create coupon
+    Coupon coupon = Coupon.create(couponToMemberQueryPort.findById(authMember.id()),
+        CouponInfo.valueOf(customCouponCreationRequestDto, imageUrl),
+        CouponType.CUSTOM);
+    couponCommandPort.createCoupon(coupon);
+
+    return new DefaultResponseDto(true, "제작티콘이 생성되었습니다.");
   }
 
   @Override
