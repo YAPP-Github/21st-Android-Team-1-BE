@@ -29,6 +29,7 @@ import yapp.buddycon.web.coupon.domain.CouponType;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CouponService implements CouponUseCase {
 
   private final CouponCommandPort couponCommandPort;
@@ -64,6 +65,7 @@ public class CouponService implements CouponUseCase {
   }
 
   @Override
+  @Transactional
   public DefaultResponseDto makeGifticon(GifticonCreationRequestDto gifticonCreationRequestDto,
       MultipartFile image, AuthMember authMember) {
     // try to upload image
@@ -79,6 +81,7 @@ public class CouponService implements CouponUseCase {
   }
 
   @Override
+  @Transactional
   public DefaultResponseDto makeCustomCoupon(
       CustomCouponCreationRequestDto customCouponCreationRequestDto, MultipartFile image, AuthMember authMember) {
     // try to upload image
