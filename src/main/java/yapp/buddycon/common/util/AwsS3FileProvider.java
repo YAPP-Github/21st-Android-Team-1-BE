@@ -30,6 +30,11 @@ public class AwsS3FileProvider implements CouponToAwsS3Port {
 
   @Override
   public String upload(MultipartFile file) {
+    // empty file
+    if (file.isEmpty()) {
+      throw new CustomException(ErrorCode.IMAGE_NOT_FOUND);
+    }
+
     String s3PathKey = PATH_ROOT + "/" + UuidProvider.generateUuid();
     ObjectMetadata metaData = new ObjectMetadata();
     metaData.setContentLength(file.getSize());
