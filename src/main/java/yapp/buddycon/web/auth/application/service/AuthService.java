@@ -10,10 +10,12 @@ import yapp.buddycon.web.auth.adapter.in.request.KakaoInfoRequestDto;
 import yapp.buddycon.web.auth.adapter.in.request.ReissueRequestDto;
 import yapp.buddycon.web.auth.application.port.out.AuthToMemberCommandPort;
 import yapp.buddycon.web.auth.application.port.out.AuthToMemberQueryPort;
+import yapp.buddycon.web.auth.application.port.out.AuthToNotificationSettingCommandPort;
 import yapp.buddycon.web.member.domain.Member;
 import yapp.buddycon.web.auth.application.port.in.OAuthMemberInfo;
 import yapp.buddycon.web.auth.adapter.in.response.TokenResponseDto;
 import yapp.buddycon.web.auth.application.port.in.AuthUseCase;
+import yapp.buddycon.web.member.domain.NotificationSetting;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class AuthService implements AuthUseCase {
   private final RedisTemplate<String, Object> redisTemplate;
   private final AuthToMemberQueryPort authToMemberQueryPort;
   private final AuthToMemberCommandPort authToMemberCommandPort;
+  private final AuthToNotificationSettingCommandPort authToNotificationSettingCommandPort;
 
   @Transactional
   public TokenResponseDto login(KakaoInfoRequestDto kakaoInfoRequestDto) {
@@ -32,12 +35,10 @@ public class AuthService implements AuthUseCase {
     Member member = authToMemberQueryPort.findMemberByClientId(oAuthMemberInfo.id());
     if (member == null){
       member = Member.create(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange());
+      authToMemberCommandPort.save(member);
+      authToNotificationSettingCommandPort.save(NotificationSetting.create(member));
     }
     return tokenProvider.createToken(member.getId());
-  }
-
-  private Member signup(OAuthMemberInfo oAuthMemberInfo, KakaoInfoRequestDto kakaoInfoRequestDto) {
-    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange()));
   }
 
   @Transactional
