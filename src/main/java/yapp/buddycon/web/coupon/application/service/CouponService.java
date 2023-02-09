@@ -22,8 +22,10 @@ import yapp.buddycon.web.coupon.application.port.out.CouponToMemberQueryPort;
 import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.application.port.out.CouponToSharedCouponQueryPort;
 
+import java.time.LocalDate;
 import java.util.List;
 import yapp.buddycon.web.coupon.domain.CouponInfo;
+import yapp.buddycon.web.coupon.domain.CouponState;
 import yapp.buddycon.web.coupon.domain.CouponType;
 
 @Service
@@ -96,5 +98,17 @@ public class CouponService implements CouponUseCase {
   @Override
   public SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode) {
     return couponToSharedCouponQueryPort.findSharedCustomCouponByBarcode(barcode);
+  }
+
+  @Override
+  @Transactional
+  public DefaultResponseDto changeCouponState(Long memberId, Long couponId, String state) {
+    if (state.equals(CouponState.USABLE.name())) {
+      Coupon coupon = couponQueryPort.findCouponUsed(memberId, couponId, LocalDate.now());
+      couponCommandPort.changeStateUsedToUsable(memberId, coupon.getId());
+    } else {
+      couponCommandPort.changeStateUsableToUsed(memberId, couponId);
+    }
+    return new DefaultResponseDto(true, "상태를 변경하였습니다.");
   }
 }

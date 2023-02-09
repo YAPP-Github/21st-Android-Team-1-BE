@@ -8,4 +8,7 @@ public interface CouponCommandPort {
 
   void deleteCoupon(Long memberId, Long couponId);
 
+  void changeStateUsableToUsed(Long memberId, Long couponId);
+  void changeStateUsedToUsable(Long memberId, Long couponId);
+
 }

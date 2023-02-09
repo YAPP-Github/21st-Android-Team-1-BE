@@ -27,4 +27,6 @@ public interface CouponUseCase {
 
   SharedGifticonInfoResponseDto getSharedGifticonInfoFromBarcode(String barcode);
   SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode);
+
+  DefaultResponseDto changeCouponState(Long memberId, Long couponId, String state);
 }

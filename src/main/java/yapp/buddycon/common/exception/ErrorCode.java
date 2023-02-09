@@ -36,6 +36,8 @@ public enum ErrorCode {
   INVALID_PAGE(BAD_REQUEST, "올바르지 않은 page 입니다."),
   INVALID_SIZE(BAD_REQUEST, "올바르지 않은 size 입니다."),
 
+  FAILED_TO_CHANGE_COUPON_STATE(BAD_REQUEST, "쿠폰의 상태가 이미 USABLE상태이거나, 만료기한이 지나 USABLE상태로 바꿀 수 없습니다."),
+
   /* 403 FORBIDDEN */
   CANT_ACCESS_NOTIFICATION(FORBIDDEN, "해당 알림에 대한 권한이 없습니다."),
 

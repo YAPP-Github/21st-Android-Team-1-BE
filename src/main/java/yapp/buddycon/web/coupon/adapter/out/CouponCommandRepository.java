@@ -20,4 +20,14 @@ public class CouponCommandRepository implements CouponCommandPort {
   public void deleteCoupon(Long memberId, Long couponId) {
     couponJpaRepository.deleteByIdAndMemberId(couponId, memberId);
   }
+
+  @Override
+  public void changeStateUsableToUsed(Long memberId, Long couponId) {
+    couponJpaRepository.changeStateUsableToUsed(memberId, couponId);
+  }
+
+  @Override
+  public void changeStateUsedToUsable(Long memberId, Long couponId) {
+    couponJpaRepository.changeStateUsedToUsable(memberId, couponId);
+  }
 }
