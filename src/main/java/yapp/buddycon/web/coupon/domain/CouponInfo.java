@@ -8,7 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponCreationRequestDto;
+import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponInfoEditRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.GifticonCreationRequestDto;
+import yapp.buddycon.web.coupon.adapter.in.request.GifticonInfoEditRequestDto;
 
 @Embeddable
 @Getter
@@ -67,6 +69,23 @@ public class CouponInfo {
         .expireDate(dto.expireDate())
         .sentMemberName(dto.sentMemberName())
         .build();
+  }
+
+  public void update(GifticonInfoEditRequestDto dto) {
+    this.name = dto.name();
+    this.expireDate = dto.expireDate();
+    this.storeName = dto.storeName();
+    this.memo = dto.memo();
+    this.isMoneyCoupon = dto.isMoneyCoupon();
+    this.leftMoney = dto.leftMoney();
+  }
+
+  public void update(CustomCouponInfoEditRequestDto dto) {
+    this.name = dto.name();
+    this.expireDate = dto.expireDate();
+    this.storeName = dto.storeName();
+    this.sentMemberName = dto.sentMemberName();
+    this.memo = dto.memo();
   }
 
 }

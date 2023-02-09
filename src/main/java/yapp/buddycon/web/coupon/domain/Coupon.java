@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
+import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponInfoEditRequestDto;
+import yapp.buddycon.web.coupon.adapter.in.request.GifticonInfoEditRequestDto;
 import yapp.buddycon.web.member.domain.Member;
 
 import javax.persistence.*;
@@ -38,6 +40,18 @@ public class Coupon extends BaseEntity {
         .state(CouponState.USABLE)
         .couponType(couponType)
         .build();
+  }
+
+  public void updateCouponInfo(GifticonInfoEditRequestDto dto) {
+    this.couponInfo.update(dto);
+  }
+
+  public void updateCouponInfo(CustomCouponInfoEditRequestDto dto) {
+    this.couponInfo.update(dto);
+  }
+
+  public boolean checkMemberPermission(Long memberId) {
+    return this.member.getId() == memberId;
   }
 
 }
