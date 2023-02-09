@@ -6,6 +6,7 @@ import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.GifticonCreationRequestDto;
+import yapp.buddycon.web.coupon.adapter.in.request.GifticonInfoEditRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.*;
 
@@ -29,4 +30,6 @@ public interface CouponUseCase {
 
   SharedGifticonInfoResponseDto getSharedGifticonInfoFromBarcode(String barcode);
   SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode);
+
+  DefaultResponseDto editGifticonInfo(Long memberId, Long couponId, GifticonInfoEditRequestDto dto);
 }

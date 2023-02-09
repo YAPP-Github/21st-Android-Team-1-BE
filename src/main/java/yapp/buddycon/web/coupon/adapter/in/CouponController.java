@@ -83,8 +83,8 @@ public class CouponController {
 
   @PutMapping("/gifticon/{id}")
   @Operation(summary = "기프티콘 정보 수정")
-  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoRequestDto gifticonInfoRequestDto, AuthMember authMember) {
-    return null;
+  public DefaultResponseDto editGifticonInfo(@PathVariable("id") long id, @RequestBody GifticonInfoEditRequestDto dto, AuthMember authMember) {
+    return couponUseCase.editGifticonInfo(authMember.id(), id, dto);
   }
 
   @PutMapping("/custom-coupon/{id}")

@@ -20,4 +20,9 @@ public class CouponCommandRepository implements CouponCommandPort {
   public void deleteCoupon(Long memberId, Long couponId) {
     couponJpaRepository.deleteByIdAndMemberId(couponId, memberId);
   }
+
+  @Override
+  public void save(Coupon coupon) {
+    couponJpaRepository.save(coupon);
+  }
 }
