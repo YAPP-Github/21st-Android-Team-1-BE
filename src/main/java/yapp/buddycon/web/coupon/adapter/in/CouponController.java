@@ -89,8 +89,8 @@ public class CouponController {
 
   @PutMapping("/custom-coupon/{id}")
   @Operation(summary = "제작티콘 정보 수정")
-  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoRequestDto customCouponInfoRequestDto, AuthMember authMember) {
-    return null;
+  public DefaultResponseDto editCustomCouponInfo(@PathVariable("id") long id, @RequestBody CustomCouponInfoEditRequestDto dto, AuthMember authMember) {
+    return couponUseCase.editCustomCouponInfo(authMember.id(), id, dto);
   }
 
 }
