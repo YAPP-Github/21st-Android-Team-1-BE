@@ -12,6 +12,7 @@ import java.util.List;
 
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
+import yapp.buddycon.web.coupon.domain.CouponState;
 
 public interface CouponUseCase {
 
@@ -28,5 +29,5 @@ public interface CouponUseCase {
   SharedGifticonInfoResponseDto getSharedGifticonInfoFromBarcode(String barcode);
   SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode);
 
-  DefaultResponseDto changeCouponState(Long memberId, Long couponId, String state);
+  DefaultResponseDto changeCouponState(Long memberId, Long couponId, CouponState state);
 }

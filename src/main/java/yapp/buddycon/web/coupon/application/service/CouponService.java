@@ -102,8 +102,8 @@ public class CouponService implements CouponUseCase {
 
   @Override
   @Transactional
-  public DefaultResponseDto changeCouponState(Long memberId, Long couponId, String state) {
-    if (state.equals(CouponState.USABLE.name())) {
+  public DefaultResponseDto changeCouponState(Long memberId, Long couponId, CouponState state) {
+    if (state.equals(CouponState.USABLE)) {
       Coupon coupon = couponQueryPort.findCouponUsed(memberId, couponId, LocalDate.now());
       couponCommandPort.changeStateUsedToUsable(memberId, coupon.getId());
     } else {
