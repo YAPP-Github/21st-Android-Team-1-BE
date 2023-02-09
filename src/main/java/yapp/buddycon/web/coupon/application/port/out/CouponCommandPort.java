@@ -8,6 +8,6 @@ public interface CouponCommandPort {
 
   void deleteCoupon(Long memberId, Long couponId);
 
-  void save(Coupon coupon);
+  void save(Long memberId, Coupon coupon);
 
 }

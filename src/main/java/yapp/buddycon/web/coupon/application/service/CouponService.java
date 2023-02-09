@@ -120,7 +120,7 @@ public class CouponService implements CouponUseCase {
   public DefaultResponseDto editGifticonInfo(Long memberId, Long couponId, GifticonInfoEditRequestDto dto) {
     Coupon coupon = couponQueryPort.findById(couponId);
     coupon.updateCouponInfo(dto);
-    couponCommandPort.save(coupon);
+    couponCommandPort.save(memberId, coupon);
     return new DefaultResponseDto(true, "기프티콘을 수정하였습니다.");
   }
 }

@@ -45,4 +45,8 @@ public class Coupon extends BaseEntity {
     this.couponInfo.update(dto);
   }
 
+  public boolean checkMemberPermission(Long memberId) {
+    return this.member.getId() == memberId;
+  }
+
 }
