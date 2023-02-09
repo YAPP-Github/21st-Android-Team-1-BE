@@ -79,7 +79,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     and c.state = 'USED'
     and c.couponInfo.expireDate > :today
   """)
-  Optional<Coupon> findCouponUsed(Long memberId, Long couponId, LocalDate today);
+  Optional<Coupon> findCouponInUsedStateAndNotExpiredWithLock(Long memberId, Long couponId, LocalDate today);
 
   @Modifying
   @Query(value = """

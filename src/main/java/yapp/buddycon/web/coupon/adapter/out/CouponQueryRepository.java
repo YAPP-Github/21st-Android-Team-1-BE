@@ -59,6 +59,6 @@ public class CouponQueryRepository implements CouponQueryPort {
 
   @Override
   public Coupon findCouponUsed(Long memberId, Long couponId, LocalDate date) {
-    return couponJpaRepository.findCouponUsed(memberId, couponId, date).orElseThrow(() -> new CustomException(ErrorCode.FAILED_TO_CHANGE_COUPON_STATE));
+    return couponJpaRepository.findCouponInUsedStateAndNotExpiredWithLock(memberId, couponId, date).orElseThrow(() -> new CustomException(ErrorCode.INVALID_STATE_CHANGE_REQUEST));
   }
 }
