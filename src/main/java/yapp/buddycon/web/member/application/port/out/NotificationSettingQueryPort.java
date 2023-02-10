@@ -1,9 +1,9 @@
 package yapp.buddycon.web.member.application.port.out;
 
-import yapp.buddycon.web.member.adapter.in.response.NotificationSettingResponseDto;
+import yapp.buddycon.web.member.domain.NotificationSetting;
 
 public interface NotificationSettingQueryPort {
 
-  NotificationSettingResponseDto findByMemberId(long memberId);
+  NotificationSetting findByMemberId(long memberId);
 
 }

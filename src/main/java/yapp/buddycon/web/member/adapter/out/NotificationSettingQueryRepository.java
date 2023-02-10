@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
-import yapp.buddycon.web.member.adapter.in.response.NotificationSettingResponseDto;
 import yapp.buddycon.web.member.application.port.out.NotificationSettingQueryPort;
+import yapp.buddycon.web.member.domain.NotificationSetting;
 
 @Repository
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class NotificationSettingQueryRepository implements NotificationSettingQu
   private final NotificationSettingJpaRepository notificationSettingJpaRepository;
 
   @Override
-  public NotificationSettingResponseDto findByMemberId(long memberId) {
+  public NotificationSetting findByMemberId(long memberId) {
     return notificationSettingJpaRepository.findByMemberId(memberId).orElseThrow(() -> new CustomException(ErrorCode.NOTIFICATION_SETTING_NOT_FOUND));
   }
 

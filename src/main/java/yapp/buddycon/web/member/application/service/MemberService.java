@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import yapp.buddycon.web.member.adapter.in.response.NotificationSettingResponseDto;
 import yapp.buddycon.web.member.application.port.in.MemberUseCase;
 import yapp.buddycon.web.member.application.port.out.NotificationSettingQueryPort;
+import yapp.buddycon.web.member.domain.NotificationSetting;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class MemberService implements MemberUseCase {
 
   @Override
   public NotificationSettingResponseDto getMembersNotificationSetting(long memberId) {
-    return notificationSettingQueryPort.findByMemberId(memberId);
+    NotificationSetting notificationSetting = notificationSettingQueryPort.findByMemberId(memberId);
+    return NotificationSettingResponseDto.valueOf(notificationSetting);
   }
 }
