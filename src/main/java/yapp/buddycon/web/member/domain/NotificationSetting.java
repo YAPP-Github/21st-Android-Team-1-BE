@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
+import yapp.buddycon.web.member.adapter.in.request.NotificationSettingUpdateRequestDto;
 
 @Entity
 @Getter
@@ -40,5 +41,13 @@ public class NotificationSetting extends BaseEntity {
       .threeDaysLeft(false)
       .oneDaysLeft(true)
       .build();
+  }
+
+  public void update(NotificationSettingUpdateRequestDto dto) {
+    this.activate = dto.activate();
+    this.fourteenDaysLeft = dto.fourteenDaysLeft();
+    this.sevenDaysLeft = dto.sevenDaysLeft();
+    this.threeDaysLeft = dto.threeDaysLeft();
+    this.oneDaysLeft = dto.oneDaysLeft();
   }
 }

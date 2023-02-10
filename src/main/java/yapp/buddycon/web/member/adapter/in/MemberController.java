@@ -28,9 +28,8 @@ public class MemberController {
 
   @PatchMapping("/notification-setting")
   @Operation(summary = "유저 알림 설정 수정")
-  public DefaultResponseDto updateNotificationSetting(AuthMember authMember,
-      NotificationSettingUpdateRequestDto dto) {
-    return null;
+  public DefaultResponseDto updateNotificationSetting(AuthMember authMember, NotificationSettingUpdateRequestDto dto) {
+    return memberUseCase.updateNotificationSetting(authMember.id(), dto);
   }
 
   @DeleteMapping("/self")
