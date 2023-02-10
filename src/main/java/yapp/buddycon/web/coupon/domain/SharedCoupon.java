@@ -21,4 +21,8 @@ public class SharedCoupon extends BaseEntity {
   @Column(name = "shared")
   private boolean shared;
 
+  public void changeToSharedState() {
+    this.shared = true;
+  }
+
 }

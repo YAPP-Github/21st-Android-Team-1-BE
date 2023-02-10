@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
-import yapp.buddycon.web.coupon.adapter.in.request.CouponStateRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
 
@@ -28,7 +27,7 @@ public class SharedCouponController {
   @PatchMapping("/{id}/state")
   @Operation(summary = "제작티콘 선물 후 공유완료 상태로 변경", description = "카카오톡으로 메시지를 보내기를 성공한 경우 api")
   public DefaultResponseDto changeCustomCouponState(@PathVariable("id") long id, AuthMember authMember) {
-    return null;
+    return sharedCouponUseCase.changeCustomCouponState(id, authMember.id());
   }
 
   @DeleteMapping("/{id}")
