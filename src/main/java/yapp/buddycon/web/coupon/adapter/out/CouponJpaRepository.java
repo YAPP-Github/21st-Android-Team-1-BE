@@ -16,7 +16,7 @@ import java.util.List;
 public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
 
   @Query(value = """
-    select new yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.name, c.couponInfo.expireDate)
+    select new yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.name, c.couponInfo.expireDate, c.createdAt)
     from Coupon c
     where c.state = :state
     and c.couponType = 'REAL'
@@ -25,7 +25,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
   List<CouponsResponseDto> findSortedGifticonsAccordingToState(@Param("state") CouponState state, Long memberId, Pageable pageable);
 
   @Query(value = """
-    select new yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.name, c.couponInfo.expireDate)
+    select new yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.name, c.couponInfo.expireDate, c.createdAt)
     from Coupon c
     where c.state = :state
     and c.couponType = 'CUSTOM'

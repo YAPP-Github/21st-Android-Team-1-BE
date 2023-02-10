@@ -32,7 +32,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
 
 
   @Query(value = """
-    select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.shared)
+    select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.createdAt, s.shared)
     from SharedCoupon s
     where s.sharedCouponInfo.sentMember.id = :memberId
     order by s.shared
@@ -40,7 +40,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
   List<SharedCouponsResponseDto> findUnsharedCustomCouponsSortedBy(Long memberId, Pageable pageable);
 
   @Query(value = """
-    select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.shared)
+    select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.createdAt, s.shared)
     from SharedCoupon s
     where s.sharedCouponInfo.sentMember.id = :memberId
   """)
