@@ -30,4 +30,14 @@ public class CouponCommandRepository implements CouponCommandPort {
     }
     couponJpaRepository.save(coupon);
   }
+
+  @Override
+  public void changeStateUsableToUsed(Long memberId, Long couponId) {
+    couponJpaRepository.changeStateUsableToUsed(memberId, couponId);
+  }
+
+  @Override
+  public void changeStateUsedToUsable(Long memberId, Long couponId) {
+    couponJpaRepository.changeStateUsedToUsable(memberId, couponId);
+  }
 }

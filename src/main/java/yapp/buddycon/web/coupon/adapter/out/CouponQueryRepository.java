@@ -12,6 +12,7 @@ import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
 import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.domain.CouponState;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -54,5 +55,10 @@ public class CouponQueryRepository implements CouponQueryPort {
   @Override
   public Coupon findById(Long id) {
     return couponJpaRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
+  }
+
+  @Override
+  public Coupon findCouponUsed(Long memberId, Long couponId, LocalDate date) {
+    return couponJpaRepository.findCouponInUsedStateAndNotExpiredWithLock(memberId, couponId, date).orElseThrow(() -> new CustomException(ErrorCode.INVALID_STATE_CHANGE_REQUEST));
   }
 }

@@ -48,7 +48,7 @@ public class CouponController {
   @PatchMapping("/{id}/state")
   @Operation(summary = "쿠폰 상태 변경", description = "상태 : USED, USABLE")
   public DefaultResponseDto changeCouponState(@PathVariable("id") long id, @RequestBody CouponStateRequestDto couponStateRequestDto, AuthMember authMember) {
-    return null;
+    return couponUseCase.changeCouponState(authMember.id(), id, couponStateRequestDto.state());
   }
 
   @PostMapping(value = "/gifticon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

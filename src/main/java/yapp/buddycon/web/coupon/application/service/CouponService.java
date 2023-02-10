@@ -25,8 +25,10 @@ import yapp.buddycon.web.coupon.application.port.out.CouponToMemberQueryPort;
 import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.application.port.out.CouponToSharedCouponQueryPort;
 
+import java.time.LocalDate;
 import java.util.List;
 import yapp.buddycon.web.coupon.domain.CouponInfo;
+import yapp.buddycon.web.coupon.domain.CouponState;
 import yapp.buddycon.web.coupon.domain.CouponType;
 
 @Service
@@ -118,6 +120,18 @@ public class CouponService implements CouponUseCase {
 
   @Override
   @Transactional
+  public DefaultResponseDto changeCouponState(Long memberId, Long couponId, CouponState state) {
+    if (state.equals(CouponState.USABLE)) {
+      Coupon coupon = couponQueryPort.findCouponUsed(memberId, couponId, LocalDate.now());
+      couponCommandPort.changeStateUsedToUsable(memberId, coupon.getId());
+    } else {
+      couponCommandPort.changeStateUsableToUsed(memberId, couponId);
+    }
+    return new DefaultResponseDto(true, "상태를 변경하였습니다.");
+  }
+
+  @Override
+  @Transactional
   public DefaultResponseDto editGifticonInfo(Long memberId, Long couponId, GifticonInfoEditRequestDto dto) {
     Coupon coupon = couponQueryPort.findById(couponId);
     coupon.updateCouponInfo(dto);
@@ -126,11 +140,12 @@ public class CouponService implements CouponUseCase {
   }
 
   @Override
+  @Transactional
   public DefaultResponseDto editCustomCouponInfo(Long memberId, Long couponId, CustomCouponInfoEditRequestDto dto) {
     Coupon coupon = couponQueryPort.findById(couponId);
     coupon.updateCouponInfo(dto);
     couponCommandPort.save(memberId, coupon);
-    return new DefaultResponseDto(true, "제작티콘 수정하였습니다.");
+    return new DefaultResponseDto(true, "제작티콘을 수정하였습니다.");
   }
 
 }

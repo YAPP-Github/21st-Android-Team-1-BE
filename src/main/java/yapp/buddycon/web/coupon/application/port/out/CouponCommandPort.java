@@ -10,4 +10,7 @@ public interface CouponCommandPort {
 
   void save(Long memberId, Coupon coupon);
 
+  void changeStateUsableToUsed(Long memberId, Long couponId);
+  void changeStateUsedToUsable(Long memberId, Long couponId);
+
 }
