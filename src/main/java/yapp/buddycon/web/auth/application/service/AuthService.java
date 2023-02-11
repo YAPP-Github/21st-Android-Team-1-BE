@@ -38,6 +38,7 @@ public class AuthService implements AuthUseCase {
       authToMemberCommandPort.save(member);
       authToNotificationSettingCommandPort.save(NotificationSetting.create(member));
     }
+    if(member.isDeleted()) throw new CustomException(ErrorCode.DELETED_MEMBER);
     return tokenProvider.createToken(member.getId());
   }
 

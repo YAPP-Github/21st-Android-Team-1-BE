@@ -2,6 +2,7 @@ package yapp.buddycon.web.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class Member extends BaseEntity {
 
   @Column(name = "client_id", unique = true)
@@ -28,6 +30,9 @@ public class Member extends BaseEntity {
   @Column(name = "age_range")
   private String ageRange;
 
+  @Column(name = "deleted")
+  private boolean deleted;
+
   public static Member create(Long clientId, String email, String name, String gender, String ageRange) {
     return Member.builder()
       .clientId(clientId)
@@ -35,7 +40,12 @@ public class Member extends BaseEntity {
       .name(name)
       .gender(gender)
       .ageRange(ageRange)
+      .deleted(false)
       .build();
+  }
+
+  public void delete() {
+    this.deleted = true;
   }
 
 }

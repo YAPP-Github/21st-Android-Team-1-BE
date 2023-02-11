@@ -37,6 +37,8 @@ public enum ErrorCode {
   INVALID_PAGE(BAD_REQUEST, "올바르지 않은 page 입니다."),
   INVALID_SIZE(BAD_REQUEST, "올바르지 않은 size 입니다."),
 
+  DELETED_MEMBER(BAD_REQUEST, "탈퇴한 회원입니다."),
+
   INVALID_STATE_CHANGE_REQUEST(BAD_REQUEST, "쿠폰의 상태가 이미 사용가능 상태이거나, 만료기한이 지났습니다."),
 
   /* 403 FORBIDDEN */

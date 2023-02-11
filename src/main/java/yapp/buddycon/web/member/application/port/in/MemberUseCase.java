@@ -10,4 +10,6 @@ public interface MemberUseCase {
 
   DefaultResponseDto updateNotificationSetting(long memberId, NotificationSettingUpdateRequestDto dto);
 
+  DefaultResponseDto deleteMember(Long id);
+
 }
