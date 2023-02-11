@@ -19,11 +19,6 @@ public class CouponCommandRepository implements CouponCommandPort {
   }
 
   @Override
-  public void deleteCoupon(Long memberId, Long couponId) {
-    couponJpaRepository.deleteByIdAndMemberId(couponId, memberId);
-  }
-
-  @Override
   public void save(Long memberId, Coupon coupon) {
     if (!coupon.checkMemberPermission(memberId)) {
       throw new CustomException(ErrorCode.CANT_ACCESS_COUPON);

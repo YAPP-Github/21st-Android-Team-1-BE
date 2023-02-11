@@ -6,8 +6,6 @@ public interface CouponCommandPort {
 
   void createCoupon(Coupon coupon);
 
-  void deleteCoupon(Long memberId, Long couponId);
-
   void save(Long memberId, Coupon coupon);
 
   void changeStateUsableToUsed(Long memberId, Long couponId);
