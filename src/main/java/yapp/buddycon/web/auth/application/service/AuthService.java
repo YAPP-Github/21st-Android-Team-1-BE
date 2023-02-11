@@ -33,11 +33,8 @@ public class AuthService implements AuthUseCase {
     if (member == null){
       member = Member.create(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange());
     }
+    if(member.isDeleted()) throw new CustomException(ErrorCode.DELETED_MEMBER);
     return tokenProvider.createToken(member.getId());
-  }
-
-  private Member signup(OAuthMemberInfo oAuthMemberInfo, KakaoInfoRequestDto kakaoInfoRequestDto) {
-    return authToMemberCommandPort.save(new Member(oAuthMemberInfo.id(), kakaoInfoRequestDto.email(), kakaoInfoRequestDto.name(), kakaoInfoRequestDto.gender(), kakaoInfoRequestDto.ageRange()));
   }
 
   @Transactional

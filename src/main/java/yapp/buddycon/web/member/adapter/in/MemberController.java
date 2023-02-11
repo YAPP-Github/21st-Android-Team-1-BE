@@ -36,7 +36,7 @@ public class MemberController {
   @DeleteMapping("/self")
   @Operation(summary = "회원 탈퇴")
   public DefaultResponseDto deleteMember(AuthMember authMember) {
-    return null;
+    return memberUseCase.deleteMember(authMember.id());
   }
 
 }
