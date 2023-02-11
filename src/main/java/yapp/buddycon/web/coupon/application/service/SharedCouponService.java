@@ -37,4 +37,12 @@ public class SharedCouponService implements SharedCouponUseCase {
     sharedCoupon.changeToSharedState();
     return new DefaultResponseDto(true, "공유완료 상태로 변경되었습니다");
   }
+
+  @Override
+  @Transactional
+  public DefaultResponseDto deleteSharedCoupon(Long memberId, Long couponId) {
+    SharedCoupon sharedCoupon = sharedCouponQueryPort.findByIdAndMemberId(couponId, memberId);
+    sharedCoupon.delete();
+    return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
+  }
 }

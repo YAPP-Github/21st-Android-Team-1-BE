@@ -49,8 +49,8 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
   @Query(value = """
     select s
     from SharedCoupon s
-    where s.id = :couponId
-    and s.sharedCouponInfo.sentMember.id = :memberId
+    where s.sharedCouponInfo.sentMember.id = :memberId
+    and s.coupon.id = :id
   """)
-  Optional<SharedCoupon> findByIdAndMemberId(Long memberId, Long couponId);
+  Optional<SharedCoupon> findByIdAndMemberId(Long id, Long memberId);
 }

@@ -10,4 +10,6 @@ public interface SharedCouponUseCase {
   List<SharedCouponsResponseDto> getSortedSharedCoupons(boolean unshared, Pageable pageable, Long memberId);
 
   DefaultResponseDto changeCustomCouponState(Long couponId, Long memberId);
+
+  DefaultResponseDto deleteSharedCoupon(Long memberId, Long couponId);
 }
