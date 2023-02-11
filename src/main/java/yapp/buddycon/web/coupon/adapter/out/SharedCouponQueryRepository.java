@@ -10,6 +10,7 @@ import yapp.buddycon.web.coupon.adapter.in.response.SharedCustomCouponResponseDt
 import yapp.buddycon.web.coupon.adapter.in.response.SharedGifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.out.CouponToSharedCouponQueryPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponQueryPort;
+import yapp.buddycon.web.coupon.domain.SharedCoupon;
 
 import java.util.List;
 
@@ -37,5 +38,10 @@ public class SharedCouponQueryRepository implements SharedCouponQueryPort, Coupo
   @Override
   public List<SharedCouponsResponseDto> findCustomCouponsSortedBy(Long memberId, Pageable pageable) {
     return sharedCouponJpaRepository.findCustomCouponsSortedBy(memberId, pageable);
+  }
+
+  @Override
+  public SharedCoupon findByIdAndMemberId(Long couponId, Long memberId) {
+    return sharedCouponJpaRepository.findByIdAndMemberId(couponId, memberId).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
   }
 }

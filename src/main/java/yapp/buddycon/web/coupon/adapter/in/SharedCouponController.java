@@ -34,6 +34,6 @@ public class SharedCouponController {
   @DeleteMapping("/{id}")
   @Operation(summary = "만든쿠폰 삭제")
   public DefaultResponseDto deleteSharedCoupon(@PathVariable("id") long id, AuthMember authMember) {
-    return null;
+    return sharedCouponUseCase.deleteSharedCoupon(authMember.id(), id);
   }
 }

@@ -45,4 +45,12 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     where s.sharedCouponInfo.sentMember.id = :memberId
   """)
   List<SharedCouponsResponseDto> findCustomCouponsSortedBy(Long memberId, Pageable pageable);
+
+  @Query(value = """
+    select s
+    from SharedCoupon s
+    where s.sharedCouponInfo.sentMember.id = :memberId
+    and s.coupon.id = :id
+  """)
+  Optional<SharedCoupon> findByIdAndMemberId(Long id, Long memberId);
 }
