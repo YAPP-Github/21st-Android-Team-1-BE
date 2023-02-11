@@ -58,8 +58,6 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
   """)
   CustomCouponInfoResponseDto findCustomCouponByMemberIdAndIdAndCouponType(Long memberId, Long id);
 
-  void deleteByIdAndMemberId(Long id, Long memberId);
-
   @Modifying
   @Query(value = """
     update Coupon c

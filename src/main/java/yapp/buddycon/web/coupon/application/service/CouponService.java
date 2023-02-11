@@ -104,7 +104,7 @@ public class CouponService implements CouponUseCase {
   @Transactional
   public DefaultResponseDto deleteCoupon(Long memberId, Long couponId) {
     Coupon coupon = couponQueryPort.findById(couponId);
-    couponCommandPort.deleteCoupon(memberId, coupon.getId());
+    coupon.delete();
     return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
   }
 

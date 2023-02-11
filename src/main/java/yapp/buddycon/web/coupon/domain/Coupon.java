@@ -33,12 +33,16 @@ public class Coupon extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private CouponType couponType;
 
+  @Column(name = "deleted")
+  private boolean deleted;
+
   public static Coupon create(Member member, CouponInfo couponInfo, CouponType couponType) {
     return Coupon.builder()
         .member(member)
         .couponInfo(couponInfo)
         .state(CouponState.USABLE)
         .couponType(couponType)
+        .deleted(false)
         .build();
   }
 
@@ -52,6 +56,10 @@ public class Coupon extends BaseEntity {
 
   public boolean checkMemberPermission(Long memberId) {
     return this.member.getId() == memberId;
+  }
+
+  public void delete(){
+    this.deleted = true;
   }
 
 }
