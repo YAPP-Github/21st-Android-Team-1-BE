@@ -24,7 +24,7 @@ public class SharedCouponService implements SharedCouponUseCase {
 
   @Override
   public List<SharedCouponsResponseDto> getSortedSharedCoupons(boolean unshared, Pageable pageable, Long memberId) {
-    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString());
+    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString(), true);
     PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
     if(unshared) return sharedCouponQueryPort.findUnsharedCustomCouponsSortedBy(memberId, pageRequest);
     else return sharedCouponQueryPort.findCustomCouponsSortedBy(memberId, pageRequest);

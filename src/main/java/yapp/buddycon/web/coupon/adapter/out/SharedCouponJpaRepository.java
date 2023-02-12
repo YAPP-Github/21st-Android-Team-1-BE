@@ -17,7 +17,8 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     from SharedCoupon s
     where s.sharedCouponInfo.barcode = :barcode
     and s.coupon.couponType = 'REAL'
-    and s.shared = false
+    and s.shared = true
+    and s.saved = false
     and s.deleted = false
   """)
   Optional<SharedGifticonInfoResponseDto> findSharedGifticonByBarcode(String barcode);
@@ -27,7 +28,8 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     from SharedCoupon s
     where s.sharedCouponInfo.barcode = :barcode
     and s.coupon.couponType = 'CUSTOM'
-    and s.shared = false
+    and s.shared = true
+    and s.saved = false
     and s.deleted = false
   """)
   Optional<SharedCustomCouponResponseDto> findSharedCustomCouponByBarcode(String barcode);
