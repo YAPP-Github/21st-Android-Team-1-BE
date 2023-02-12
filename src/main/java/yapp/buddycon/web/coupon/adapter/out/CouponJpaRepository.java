@@ -20,7 +20,7 @@ import java.util.Optional;
 public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
 
   @Lock(LockModeType.PESSIMISTIC_WRITE)
-  Optional<Coupon> findById(Long id);
+  Optional<Coupon> findByIdAndDeletedFalse(Long id);
 
   @Query(value = """
     select new yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.name, c.couponInfo.expireDate, c.createdAt)
@@ -28,6 +28,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     where c.state = :state
     and c.couponType = 'REAL'
     and c.member.id = :memberId
+    and c.deleted = false
   """)
   List<CouponsResponseDto> findSortedGifticonsAccordingToState(@Param("state") CouponState state, Long memberId, Pageable pageable);
 
@@ -37,6 +38,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     where c.state = :state
     and c.couponType = 'CUSTOM'
     and c.member.id = :memberId
+    and c.deleted = false
   """)
   List<CouponsResponseDto> findSortedCustomCouponsAccordingToState(@Param("state") CouponState state, Long memberId, Pageable pageable);
 
@@ -46,6 +48,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     where c.member.id = :memberId
     and c.id = :id
     and c.couponType = 'REAL'
+    and c.deleted = false
   """)
   GifticonInfoResponseDto findGifticonByMemberIdAndIdAndCouponType(Long memberId, Long id);
 
@@ -55,6 +58,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     where c.member.id = :memberId
     and c.id = :id
     and c.couponType = 'CUSTOM'
+    and c.deleted = false
   """)
   CustomCouponInfoResponseDto findCustomCouponByMemberIdAndIdAndCouponType(Long memberId, Long id);
 
@@ -64,6 +68,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     set c.state = 'USED'
     where c.member.id = :memberId
     and c.id = :couponId
+    and c.deleted = false
   """
   )
   void changeStateUsableToUsed(Long memberId, Long couponId);
@@ -76,6 +81,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     and c.id = :couponId
     and c.state = 'USED'
     and c.couponInfo.expireDate > :today
+    and c.deleted = false
   """)
   Optional<Coupon> findCouponInUsedStateAndNotExpiredWithLock(Long memberId, Long couponId, LocalDate today);
 
@@ -85,6 +91,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
     set c.state = 'USABLE'
     where c.member.id = :memberId
     and c.id = :couponId
+    and c.deleted = false
   """
   )
   void changeStateUsedToUsable(Long memberId, Long couponId);
