@@ -18,7 +18,7 @@ class MemberQueryRepository implements MemberQueryPort,
 
     @Override
     public Member findMemberByClientId(Long clientId) {
-        return memberJpaRepository.findMemberByClientId(clientId);
+        return memberJpaRepository.findMemberByClientIdAndDeletedFalse(clientId);
     }
 
     @Override
