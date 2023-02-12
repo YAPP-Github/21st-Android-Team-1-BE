@@ -18,6 +18,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     where s.sharedCouponInfo.barcode = :barcode
     and s.coupon.couponType = 'REAL'
     and s.shared = false
+    and s.deleted = false
   """)
   Optional<SharedGifticonInfoResponseDto> findSharedGifticonByBarcode(String barcode);
 
@@ -27,6 +28,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     where s.sharedCouponInfo.barcode = :barcode
     and s.coupon.couponType = 'CUSTOM'
     and s.shared = false
+    and s.deleted = false
   """)
   Optional<SharedCustomCouponResponseDto> findSharedCustomCouponByBarcode(String barcode);
 
@@ -35,6 +37,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.createdAt, s.shared)
     from SharedCoupon s
     where s.sharedCouponInfo.sentMember.id = :memberId
+    and s.deleted = false
     order by s.shared
   """)
   List<SharedCouponsResponseDto> findUnsharedCustomCouponsSortedBy(Long memberId, Pageable pageable);
@@ -43,6 +46,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     select new yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto(s.id, s.sharedCouponInfo.imageUrl, s.sharedCouponInfo.name, s.sharedCouponInfo.expireDate, s.createdAt, s.shared)
     from SharedCoupon s
     where s.sharedCouponInfo.sentMember.id = :memberId
+    and s.deleted = false
   """)
   List<SharedCouponsResponseDto> findCustomCouponsSortedBy(Long memberId, Pageable pageable);
 
@@ -51,6 +55,7 @@ public interface SharedCouponJpaRepository extends JpaRepository<SharedCoupon, L
     from SharedCoupon s
     where s.sharedCouponInfo.sentMember.id = :memberId
     and s.coupon.id = :id
+    and s.deleted = false
   """)
   Optional<SharedCoupon> findByIdAndMemberId(Long id, Long memberId);
 }
