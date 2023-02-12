@@ -54,7 +54,7 @@ public class CouponQueryRepository implements CouponQueryPort {
 
   @Override
   public Coupon findById(Long id) {
-    return couponJpaRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
+    return couponJpaRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
   }
 
   @Override
