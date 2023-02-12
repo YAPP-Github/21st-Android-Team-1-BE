@@ -44,7 +44,7 @@ public class CouponService implements CouponUseCase {
 
   @Override
   public List<CouponsResponseDto> getSortedGifticons(boolean usable, Pageable pageable, AuthMember authMember) {
-    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString());
+    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString(), false);
     PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
     if(usable) return couponQueryPort.findUsableGifticonsSortedBy(pageRequest, authMember.id());
     return couponQueryPort.findUsedGifticonsSortedBy(pageRequest, authMember.id());
@@ -52,7 +52,7 @@ public class CouponService implements CouponUseCase {
 
   @Override
   public List<CouponsResponseDto> getSortedCustomCoupons(boolean usable, Pageable pageable, AuthMember authMember) {
-    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString());
+    Sort sort = SortPageableValidation.validateSortProperty(pageable.getSort().toString(), false);
     PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
     if(usable) return couponQueryPort.findUsableCustomCouponsSortedBy(pageRequest, authMember.id());
     return couponQueryPort.findUsedCustomCouponsSortedBy(pageRequest, authMember.id());
