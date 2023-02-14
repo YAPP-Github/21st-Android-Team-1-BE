@@ -81,6 +81,8 @@ public class CouponService implements CouponUseCase {
         CouponType.REAL);
     couponCommandPort.createCoupon(coupon);
 
+    if(gifticonCreationRequestDto.sharedCouponId() != null) couponToSharedCouponQueryPort.findById(gifticonCreationRequestDto.sharedCouponId()).save();
+
     return new DefaultResponseDto(true, "기프티콘이 생성되었습니다.");
   }
 
@@ -96,6 +98,8 @@ public class CouponService implements CouponUseCase {
         CouponInfo.valueOf(customCouponCreationRequestDto, imageUrl),
         CouponType.CUSTOM);
     couponCommandPort.createCoupon(coupon);
+
+    if(customCouponCreationRequestDto.sharedCouponId() != null) couponToSharedCouponQueryPort.findById(customCouponCreationRequestDto.sharedCouponId()).save();
 
     return new DefaultResponseDto(true, "제작티콘이 생성되었습니다.");
   }
