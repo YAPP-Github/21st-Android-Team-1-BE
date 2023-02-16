@@ -35,4 +35,8 @@ public class SharedCoupon extends BaseEntity {
     this.deleted = true;
   }
 
+  public void save(){
+    this.saved = true;
+  }
+
 }

@@ -31,6 +31,11 @@ public class SharedCouponQueryRepository implements SharedCouponQueryPort, Coupo
   }
 
   @Override
+  public SharedCoupon findById(long id) {
+    return sharedCouponJpaRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.INVALID_COUPON_ID));
+  }
+
+  @Override
   public List<SharedCouponsResponseDto> findUnsharedCustomCouponsSortedBy(Long memberId, Pageable pageable) {
     return sharedCouponJpaRepository.findUnsharedCustomCouponsSortedBy(memberId, pageable);
   }
