@@ -33,7 +33,7 @@ public class SharedCouponService implements SharedCouponUseCase {
   @Override
   @Transactional
   public DefaultResponseDto changeCustomCouponState(Long couponId, Long memberId) {
-    SharedCoupon sharedCoupon = sharedCouponCommandPort.findByIdAndMemberId(couponId, memberId);
+    SharedCoupon sharedCoupon = sharedCouponQueryPort.findByIdAndMemberId(couponId, memberId);
     sharedCoupon.changeToSharedState();
     return new DefaultResponseDto(true, "공유완료 상태로 변경되었습니다");
   }
