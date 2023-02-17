@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
-import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3Port;
+import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3FileProviderPort;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class AwsS3FileProvider implements CouponToAwsS3Port {
+public class AwsS3FileProvider implements CouponToAwsS3FileProviderPort {
 
   private final AmazonS3 s3Client;
 

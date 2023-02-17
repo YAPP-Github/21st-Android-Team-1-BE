@@ -18,7 +18,7 @@ import yapp.buddycon.web.coupon.adapter.in.response.CouponsResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.CustomCouponInfoResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.CouponUseCase;
-import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3Port;
+import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3FileProviderPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
 import yapp.buddycon.web.coupon.application.port.out.CouponToMemberQueryPort;
@@ -40,7 +40,7 @@ public class CouponService implements CouponUseCase {
   private final CouponQueryPort couponQueryPort;
   private final CouponToSharedCouponQueryPort couponToSharedCouponQueryPort;
   private final CouponToMemberQueryPort couponToMemberQueryPort;
-  private final CouponToAwsS3Port couponToAwsS3Port;
+  private final CouponToAwsS3FileProviderPort couponToAwsS3Port;
 
   @Override
   public List<CouponsResponseDto> getSortedGifticons(boolean usable, Pageable pageable, AuthMember authMember) {
