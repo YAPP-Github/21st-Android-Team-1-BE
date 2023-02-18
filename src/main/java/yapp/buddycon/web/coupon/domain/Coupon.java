@@ -46,6 +46,10 @@ public class Coupon extends BaseEntity {
         .build();
   }
 
+  public void changeToSharedState() {
+    this.state = CouponState.SHARED;
+  }
+
   public void updateCouponInfo(GifticonInfoEditRequestDto dto) {
     this.couponInfo.update(dto);
   }
