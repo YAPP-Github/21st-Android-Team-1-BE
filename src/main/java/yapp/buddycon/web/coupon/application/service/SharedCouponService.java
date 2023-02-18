@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForCustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
@@ -63,10 +64,23 @@ public class SharedCouponService implements SharedCouponUseCase {
   public DefaultResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId) {
     Member sentMember = couponToMemberQueryPort.findById(memberId);
     String imageUrl = couponToAwsS3FileProviderPort.upload(image);
+
     Coupon coupon = couponQueryPort.findById(dto.couponId());
 
-    SharedCoupon.createForGifticon(dto, coupon, sentMember, imageUrl);
+    SharedCoupon.createForGifticon(dto, sentMember, imageUrl, coupon);
     return new DefaultResponseDto(true, "만든 쿠폰(재활용)이 생성되었습니다.");
+  }
+
+  @Override
+  @Transactional
+  public DefaultResponseDto makeSharedCouponForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto, MultipartFile image, Long memberId) {
+    Member sentMember = couponToMemberQueryPort.findById(memberId);
+    String imageUrl = couponToAwsS3FileProviderPort.upload(image);
+
+    String barcodeNumber = couponToBarcodeNumberProviderPort.createRandomBarcodeNumber();
+
+    SharedCoupon.createForCustomCoupon(dto, sentMember, imageUrl, barcodeNumber);
+    return new DefaultResponseDto(true, "만든 쿠폰(제작)이 생성되었습니다.");
   }
 
 }

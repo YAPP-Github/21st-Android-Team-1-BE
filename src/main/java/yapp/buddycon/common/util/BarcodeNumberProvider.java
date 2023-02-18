@@ -1,10 +1,14 @@
 package yapp.buddycon.common.util;
 
 import java.util.Random;
+import org.springframework.stereotype.Component;
+import yapp.buddycon.web.coupon.application.port.out.CouponToBarcodeNumberProviderPort;
 
-public class BarcodeNumberProvider {
+@Component
+public class BarcodeNumberProvider implements CouponToBarcodeNumberProviderPort {
 
-  public String createRandomBarcode() {
+  @Override
+  public String createRandomBarcodeNumber() {
     int leftLimit = 48; // numeral '0'
     int rightLimit = 57; // letter '9'
     int[] lengthList = {4, 4, 7};

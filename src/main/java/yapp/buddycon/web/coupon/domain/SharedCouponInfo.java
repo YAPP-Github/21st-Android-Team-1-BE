@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForCustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
 import yapp.buddycon.web.member.domain.Member;
 
@@ -47,7 +48,20 @@ public class SharedCouponInfo {
   @Column(name = "shared_at")
   private LocalDateTime sharedAt;
 
+  // TODO dto 다형성 적용
   public static SharedCouponInfo valueOf(SharedCouponForGifticonCreationRequestDto dto, String barcode, String imageUrl, Member sentMember) {
+    return SharedCouponInfo.builder()
+        .barcode(barcode)
+        .imageUrl(imageUrl)
+        .sentMember(sentMember)
+        .name(dto.name())
+        .memo(dto.memo())
+        .storeName(dto.storeName())
+        .expireDate(dto.expireDate())
+        .build();
+  }
+
+  public static SharedCouponInfo valueOf(SharedCouponForCustomCouponCreationRequestDto dto, String barcode, String imageUrl, Member sentMember) {
     return SharedCouponInfo.builder()
         .barcode(barcode)
         .imageUrl(imageUrl)
