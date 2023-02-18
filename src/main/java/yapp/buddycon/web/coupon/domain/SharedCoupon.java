@@ -50,7 +50,7 @@ public class SharedCoupon extends BaseEntity {
         .coupon(coupon)
         .sharedCouponInfo(SharedCouponInfo.valueOf(
             dto, imageUrl, coupon.getCouponInfo().getBarcode(), sentMember))
-        .shared(dto.shared())
+        .shared(false)
         .saved(false)
         .deleted(false)
         .build();
@@ -61,7 +61,7 @@ public class SharedCoupon extends BaseEntity {
     return SharedCoupon.builder()
         .sharedCouponInfo(SharedCouponInfo.valueOf(
             dto, imageUrl, barcodeNumber, sentMember))
-        .shared(dto.shared())
+        .shared(false)
         .saved(false)
         .deleted(false)
         .build();

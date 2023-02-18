@@ -7,8 +7,7 @@ public record SharedCouponForGifticonCreationRequestDto(
     String name,
     LocalDate expireDate,
     String storeName,
-    String memo,
-    Boolean shared
+    String memo
 ) {
 
 }
