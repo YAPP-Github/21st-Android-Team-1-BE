@@ -6,14 +6,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
+import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
+import yapp.buddycon.web.coupon.application.port.out.CouponQueryPort;
+import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3FileProviderPort;
+import yapp.buddycon.web.coupon.application.port.out.CouponToMemberQueryPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponQueryPort;
+import yapp.buddycon.web.coupon.application.port.out.CouponToBarcodeNumberProviderPort;
+import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.domain.SharedCoupon;
 
 import java.util.List;
+import yapp.buddycon.web.member.domain.Member;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +29,10 @@ public class SharedCouponService implements SharedCouponUseCase {
 
   private final SharedCouponCommandPort sharedCouponCommandPort;
   private final SharedCouponQueryPort sharedCouponQueryPort;
+  private final CouponToBarcodeNumberProviderPort couponToBarcodeNumberProviderPort;
+  private final CouponToAwsS3FileProviderPort couponToAwsS3FileProviderPort;
+  private final CouponToMemberQueryPort couponToMemberQueryPort;
+  private final CouponQueryPort couponQueryPort;
 
   @Override
   public List<SharedCouponsResponseDto> getSortedSharedCoupons(boolean unshared, Pageable pageable, Long memberId) {
@@ -45,4 +57,16 @@ public class SharedCouponService implements SharedCouponUseCase {
     sharedCoupon.delete();
     return new DefaultResponseDto(true, "쿠폰을 삭제하였습니다.");
   }
+
+  @Override
+  @Transactional
+  public DefaultResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId) {
+    Member sentMember = couponToMemberQueryPort.findById(memberId);
+    String imageUrl = couponToAwsS3FileProviderPort.upload(image);
+    Coupon coupon = couponQueryPort.findById(dto.couponId());
+
+    SharedCoupon.createForGifticon(dto, coupon, sentMember, imageUrl);
+    return new DefaultResponseDto(true, "만든 쿠폰(재활용)이 생성되었습니다.");
+  }
+
 }

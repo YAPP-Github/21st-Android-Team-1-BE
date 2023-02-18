@@ -1,6 +1,11 @@
 package yapp.buddycon.web.coupon.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
 import yapp.buddycon.web.member.domain.Member;
 
 import javax.persistence.Column;
@@ -11,6 +16,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Embeddable
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SharedCouponInfo {
 
   @Column(name = "barcode", nullable = false)
@@ -37,5 +46,17 @@ public class SharedCouponInfo {
 
   @Column(name = "shared_at")
   private LocalDateTime sharedAt;
+
+  public static SharedCouponInfo valueOf(SharedCouponForGifticonCreationRequestDto dto, String barcode, String imageUrl, Member sentMember) {
+    return SharedCouponInfo.builder()
+        .barcode(barcode)
+        .imageUrl(imageUrl)
+        .sentMember(sentMember)
+        .name(dto.name())
+        .memo(dto.memo())
+        .storeName(dto.storeName())
+        .expireDate(dto.expireDate())
+        .build();
+  }
 
 }

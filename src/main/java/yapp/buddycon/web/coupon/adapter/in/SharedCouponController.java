@@ -3,9 +3,12 @@ package yapp.buddycon.web.coupon.adapter.in;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
+import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto;
 import yapp.buddycon.web.coupon.application.port.in.SharedCouponUseCase;
 
@@ -35,4 +38,13 @@ public class SharedCouponController {
   public DefaultResponseDto deleteSharedCoupon(@PathVariable("id") long id, AuthMember authMember) {
     return sharedCouponUseCase.deleteSharedCoupon(authMember.id(), id);
   }
+
+  @PostMapping(value = "/gifticon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(summary = "기프티콘으로 만든 쿠폰 추가 (재활용)")
+  public DefaultResponseDto makeSharedCouponForGifticon(@RequestBody SharedCouponForGifticonCreationRequestDto dto,
+      @RequestPart MultipartFile image, AuthMember authMember) {
+    return sharedCouponUseCase.makeSharedCouponForGifticon(dto, image, authMember.id());
+  }
+
+
 }
