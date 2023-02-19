@@ -75,9 +75,7 @@ public class SharedCouponService implements SharedCouponUseCase {
     Member sentMember = couponToMemberQueryPort.findById(memberId);
     String imageUrl = couponToAwsS3FileProviderPort.upload(image);
 
-    String barcodeNumber = couponToBarcodeNumberProviderPort.createRandomBarcodeNumber();
-
-    SharedCoupon.createForCustomCoupon(dto, sentMember, imageUrl, barcodeNumber);
+    SharedCoupon.createForCustomCoupon(dto, sentMember, imageUrl);
     return new DefaultResponseDto(true, "만든 쿠폰(제작)이 생성되었습니다.");
   }
 

@@ -57,10 +57,9 @@ public class SharedCoupon extends BaseEntity {
   }
 
   public static SharedCoupon createForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto,
-      Member sentMember, String imageUrl, String barcodeNumber) {
+      Member sentMember, String imageUrl) {
     return SharedCoupon.builder()
-        .sharedCouponInfo(SharedCouponInfo.valueOf(
-            dto, imageUrl, barcodeNumber, sentMember))
+        .sharedCouponInfo(SharedCouponInfo.valueOf(dto, imageUrl, sentMember))
         .shared(false)
         .saved(false)
         .deleted(false)

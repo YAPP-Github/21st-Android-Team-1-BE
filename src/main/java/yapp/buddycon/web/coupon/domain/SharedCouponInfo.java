@@ -61,9 +61,9 @@ public class SharedCouponInfo {
         .build();
   }
 
-  public static SharedCouponInfo valueOf(SharedCouponForCustomCouponCreationRequestDto dto, String barcode, String imageUrl, Member sentMember) {
+  public static SharedCouponInfo valueOf(SharedCouponForCustomCouponCreationRequestDto dto, String imageUrl, Member sentMember) {
     return SharedCouponInfo.builder()
-        .barcode(barcode)
+        .barcode(dto.barcodeNumber())
         .imageUrl(imageUrl)
         .sentMember(sentMember)
         .name(dto.name())

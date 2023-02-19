@@ -6,7 +6,8 @@ public record SharedCouponForCustomCouponCreationRequestDto(
     String name,
     LocalDate expireDate,
     String storeName,
-    String memo
+    String memo,
+    String barcodeNumber
 ) {
 
 }
