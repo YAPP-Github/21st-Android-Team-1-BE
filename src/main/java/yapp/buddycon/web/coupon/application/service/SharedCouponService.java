@@ -17,7 +17,6 @@ import yapp.buddycon.web.coupon.application.port.out.CouponToAwsS3FileProviderPo
 import yapp.buddycon.web.coupon.application.port.out.CouponToMemberQueryPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponCommandPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponQueryPort;
-import yapp.buddycon.web.coupon.application.port.out.CouponToBarcodeNumberProviderPort;
 import yapp.buddycon.web.coupon.domain.Coupon;
 import yapp.buddycon.web.coupon.domain.SharedCoupon;
 
@@ -30,7 +29,6 @@ public class SharedCouponService implements SharedCouponUseCase {
 
   private final SharedCouponCommandPort sharedCouponCommandPort;
   private final SharedCouponQueryPort sharedCouponQueryPort;
-  private final CouponToBarcodeNumberProviderPort couponToBarcodeNumberProviderPort;
   private final CouponToAwsS3FileProviderPort couponToAwsS3FileProviderPort;
   private final CouponToMemberQueryPort couponToMemberQueryPort;
   private final CouponQueryPort couponQueryPort;
