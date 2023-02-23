@@ -43,7 +43,7 @@ public interface CouponJpaRepository extends JpaRepository<Coupon, Long> {
   List<CouponsResponseDto> findSortedCustomCouponsAccordingToState(@Param("state") CouponState state, Long memberId, Pageable pageable);
 
   @Query(value = """
-    select new yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.barcode, c.couponInfo.name, c.couponInfo.expireDate, c.couponInfo.storeName, c.couponInfo.memo, c.couponInfo.isMoneyCoupon, c.couponInfo.leftMoney)
+    select new yapp.buddycon.web.coupon.adapter.in.response.GifticonInfoResponseDto(c.id, c.couponInfo.imageUrl, c.couponInfo.barcode, c.couponInfo.name, c.couponInfo.expireDate, c.couponInfo.storeName, c.couponInfo.sentMemberName, c.couponInfo.memo, c.couponInfo.isMoneyCoupon, c.couponInfo.leftMoney)
     from Coupon c
     where c.member.id = :memberId
     and c.id = :id

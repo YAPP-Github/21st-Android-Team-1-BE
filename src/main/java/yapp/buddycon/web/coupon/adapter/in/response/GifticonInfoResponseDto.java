@@ -9,6 +9,7 @@ public record GifticonInfoResponseDto(
   String name,
   LocalDate expireDate,
   String storeName,
+  String sentMemberName,
   String memo,
   boolean isMoneyCoupon,
   Integer leftMoney
