@@ -2,6 +2,7 @@ package yapp.buddycon.web.coupon.application.port.in;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+import yapp.buddycon.common.response.DefaultIdResponseDto;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForCustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
@@ -16,8 +17,8 @@ public interface SharedCouponUseCase {
 
   DefaultResponseDto deleteSharedCoupon(Long memberId, Long couponId);
 
-  DefaultResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId);
+  DefaultIdResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId);
 
-  DefaultResponseDto makeSharedCouponForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto, MultipartFile image, Long memberId);
+  DefaultIdResponseDto makeSharedCouponForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto, MultipartFile image, Long memberId);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import yapp.buddycon.common.response.DefaultIdResponseDto;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForCustomCouponCreationRequestDto;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForGifticonCreationRequestDto;
@@ -59,24 +60,28 @@ public class SharedCouponService implements SharedCouponUseCase {
 
   @Override
   @Transactional
-  public DefaultResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId) {
+  public DefaultIdResponseDto makeSharedCouponForGifticon(SharedCouponForGifticonCreationRequestDto dto, MultipartFile image, Long memberId) {
     Member sentMember = couponToMemberQueryPort.findById(memberId);
     String imageUrl = couponToAwsS3FileProviderPort.upload(image);
 
     Coupon coupon = couponQueryPort.findById(dto.couponId());
 
-    SharedCoupon.createForGifticon(dto, sentMember, imageUrl, coupon);
-    return new DefaultResponseDto(true, "만든 쿠폰(재활용)이 생성되었습니다.");
+    SharedCoupon sharedCoupon = SharedCoupon.createForGifticon(dto, sentMember, imageUrl, coupon);
+    sharedCouponCommandPort.save(sharedCoupon);
+
+    return new DefaultIdResponseDto(sharedCoupon.getId(), true, "만든 쿠폰(재활용)이 생성되었습니다.");
   }
 
   @Override
   @Transactional
-  public DefaultResponseDto makeSharedCouponForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto, MultipartFile image, Long memberId) {
+  public DefaultIdResponseDto makeSharedCouponForCustomCoupon(SharedCouponForCustomCouponCreationRequestDto dto, MultipartFile image, Long memberId) {
     Member sentMember = couponToMemberQueryPort.findById(memberId);
     String imageUrl = couponToAwsS3FileProviderPort.upload(image);
 
-    SharedCoupon.createForCustomCoupon(dto, sentMember, imageUrl);
-    return new DefaultResponseDto(true, "만든 쿠폰(제작)이 생성되었습니다.");
+    SharedCoupon sharedCoupon = SharedCoupon.createForCustomCoupon(dto, sentMember, imageUrl);
+    sharedCouponCommandPort.save(sharedCoupon);
+
+    return new DefaultIdResponseDto(sharedCoupon.getId(), true, "만든 쿠폰(제작)이 생성되었습니다.");
   }
 
 }
