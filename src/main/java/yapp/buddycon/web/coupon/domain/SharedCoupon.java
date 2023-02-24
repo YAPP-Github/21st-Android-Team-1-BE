@@ -2,6 +2,7 @@ package yapp.buddycon.web.coupon.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yapp.buddycon.common.domain.BaseEntity;
 
@@ -12,6 +13,7 @@ import yapp.buddycon.web.member.domain.Member;
 
 @Entity
 @Builder
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SharedCoupon extends BaseEntity {

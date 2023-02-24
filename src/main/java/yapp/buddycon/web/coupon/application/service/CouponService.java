@@ -7,6 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import yapp.buddycon.common.exception.CustomException;
+import yapp.buddycon.common.exception.ErrorCode;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.request.CustomCouponCreationRequestDto;
@@ -30,6 +32,7 @@ import java.util.List;
 import yapp.buddycon.web.coupon.domain.CouponInfo;
 import yapp.buddycon.web.coupon.domain.CouponState;
 import yapp.buddycon.web.coupon.domain.CouponType;
+import yapp.buddycon.web.coupon.domain.SharedCoupon;
 
 @Service
 @RequiredArgsConstructor
@@ -114,12 +117,20 @@ public class CouponService implements CouponUseCase {
 
   @Override
   public SharedGifticonInfoResponseDto getSharedGifticonInfoFromBarcode(String barcode) {
-    return couponToSharedCouponQueryPort.findSharedGifticonByBarcode(barcode);
+    SharedCoupon sharedCoupon = couponToSharedCouponQueryPort.findSharedGifticonByBarcode(barcode);
+    if (sharedCoupon.isSaved()) {
+      throw new CustomException(ErrorCode.ALREADY_SAVED_SHARED_COUPON);
+    }
+    return SharedGifticonInfoResponseDto.valueOf(sharedCoupon);
   }
 
   @Override
   public SharedCustomCouponResponseDto getSharedCustomCouponInfoFromBarcode(String barcode) {
-    return couponToSharedCouponQueryPort.findSharedCustomCouponByBarcode(barcode);
+    SharedCoupon sharedCoupon = couponToSharedCouponQueryPort.findSharedCustomCouponByBarcode(barcode);
+    if (sharedCoupon.isSaved()) {
+      throw new CustomException(ErrorCode.ALREADY_SAVED_SHARED_COUPON);
+    }
+    return SharedCustomCouponResponseDto.valueOf(sharedCoupon);
   }
 
   @Override
