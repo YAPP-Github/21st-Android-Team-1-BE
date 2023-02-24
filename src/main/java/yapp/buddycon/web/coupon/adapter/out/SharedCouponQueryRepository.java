@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import yapp.buddycon.common.exception.CustomException;
 import yapp.buddycon.common.exception.ErrorCode;
 import yapp.buddycon.web.coupon.adapter.in.response.SharedCouponsResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.SharedCustomCouponResponseDto;
-import yapp.buddycon.web.coupon.adapter.in.response.SharedGifticonInfoResponseDto;
 import yapp.buddycon.web.coupon.application.port.out.CouponToSharedCouponQueryPort;
 import yapp.buddycon.web.coupon.application.port.out.SharedCouponQueryPort;
 import yapp.buddycon.web.coupon.domain.SharedCoupon;
@@ -21,12 +19,12 @@ public class SharedCouponQueryRepository implements SharedCouponQueryPort, Coupo
   private final SharedCouponJpaRepository sharedCouponJpaRepository;
 
   @Override
-  public SharedGifticonInfoResponseDto findSharedGifticonByBarcode(String barcode) {
+  public SharedCoupon findSharedGifticonByBarcode(String barcode) {
     return sharedCouponJpaRepository.findSharedGifticonByBarcode(barcode).orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_BARCODE_NUMBER));
   }
 
   @Override
-  public SharedCustomCouponResponseDto findSharedCustomCouponByBarcode(String barcode) {
+  public SharedCoupon findSharedCustomCouponByBarcode(String barcode) {
     return sharedCouponJpaRepository.findSharedCustomCouponByBarcode(barcode).orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_BARCODE_NUMBER));
   }
 
