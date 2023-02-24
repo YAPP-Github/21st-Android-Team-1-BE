@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import yapp.buddycon.common.response.DefaultIdResponseDto;
 import yapp.buddycon.common.response.DefaultResponseDto;
 import yapp.buddycon.web.auth.adapter.out.AuthMember;
 import yapp.buddycon.web.coupon.adapter.in.request.SharedCouponForCustomCouponCreationRequestDto;
@@ -42,14 +43,14 @@ public class SharedCouponController {
 
   @PostMapping(value = "/gifticon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "기프티콘으로 만든 쿠폰 추가 (재활용)")
-  public DefaultResponseDto makeSharedCouponForGifticon(@RequestBody SharedCouponForGifticonCreationRequestDto dto,
+  public DefaultIdResponseDto makeSharedCouponForGifticon(@RequestBody SharedCouponForGifticonCreationRequestDto dto,
       @RequestPart MultipartFile image, AuthMember authMember) {
     return sharedCouponUseCase.makeSharedCouponForGifticon(dto, image, authMember.id());
   }
 
   @PostMapping(value = "/custom-coupon", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "제작티콘으로 만든 쿠폰 추가")
-  public DefaultResponseDto makeSharedCouponForCustomCoupon(@RequestBody SharedCouponForCustomCouponCreationRequestDto dto,
+  public DefaultIdResponseDto makeSharedCouponForCustomCoupon(@RequestBody SharedCouponForCustomCouponCreationRequestDto dto,
       @RequestPart MultipartFile image, AuthMember authMember) {
     return sharedCouponUseCase.makeSharedCouponForCustomCoupon(dto, image, authMember.id());
   }
