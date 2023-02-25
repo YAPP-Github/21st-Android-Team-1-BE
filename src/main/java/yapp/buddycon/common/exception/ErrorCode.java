@@ -45,11 +45,13 @@ public enum ErrorCode {
   CANT_ACCESS_NOTIFICATION(FORBIDDEN, "해당 알림에 대한 권한이 없습니다."),
   CANT_ACCESS_COUPON(FORBIDDEN, "해당 쿠폰에 대한 권한이 없습니다."),
 
-  NOT_EXIST_BARCODE_NUMBER(NO_CONTENT, "바코드에 해당하는 쿠폰이 존재하지 않습니다"),
-  ALREADY_SAVED_SHARED_COUPON(NO_CONTENT, "이미 저장된 만든 쿠폰입니다.")
+  NOT_EXIST_BARCODE_NUMBER(BAD_REQUEST, "바코드에 해당하는 쿠폰이 존재하지 않습니다"),
+  ALREADY_SAVED_SHARED_COUPON(BAD_REQUEST, "이미 저장된 만든 쿠폰입니다.")
 
   ;
 
   private final HttpStatus httpStatus;
   private final String message;
 }
+
+
